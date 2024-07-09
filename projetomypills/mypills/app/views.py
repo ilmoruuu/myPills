@@ -20,3 +20,6 @@ def perfil(request, user):
     user_num = {user}
     return render(request, 'app/perfil.html',
                   {'user': user_num})
+
+def add(request):
+    return render(request, 'app/add.html')
