@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="{% static 'app/styles.css' %}">
+    <title>Login</title>
+</head>
+<body>
+    <div class="background-filmes">
+
+        <header class="container">
+            <img src="assets/logo.png" class="logo-login">
+        </header>
+
+        <div class="row flex-row justify-content-center">
+            <div class="col-4 caixa-login">
+                <label style="font-size: 32px; color: white; font-weight: 660;">
+                    Entrar
+                </label>
+                <form>
+                    <div class="formulario">
+                        <input
+                        type="text"
+                        class="caixa-formulario"
+                        placeholder="  Email ou número de celular">
+                        <br>
+                        <input
+                        type="password"
+                        class="caixa-formulario"
+                        placeholder="  Senha">
+                        <br>
+                        <input 
+                        type="submit" 
+                        class="formulario-botoes"
+                        style="background: #E50914;"
+                        value="Entrar">
+
+                        <div style="color: #C0C0C0; margin: 5px 0;">OU</div>
+
+                        <button class="formulario-botoes" style="background: rgba(218, 176, 176, 0.20);">
+                            Usar um código de acesso
+                        </button>
+                        <a href="#" style="color: white; margin-top: 5px; margin-bottom: 10px;">Esqueceu a senha?</a>
+                </div>
+                    <input type="checkbox"> Lembre-se de mim
+                    <br>
+                    <br>
+                    <div>Novo por aqui?<a href="#">Assine agora</a>
+                    </div>
+                    <br>
+                    <div style="font-size: small; color:#989898">Esta página é protegida pelo Google reCAPTCHA para garantir que você não é um robô. 
+                        <a href="#" style="color: blue;">Saiba mais.</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
