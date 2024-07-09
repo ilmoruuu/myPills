@@ -1,18 +1,6 @@
 body {
-    background-color: black;
+    background-color: #4C9E7C;
     color: rgb(212, 211, 211);
-}
-
-.background-filmes {
-    background-image: url(assets/background.png);
-    background-image: cover;
-    background-size: cover;
-    height: 100%;
-    min-height: 100vh;
-    position: absolute;
-    overflow-x: hidden;
-    width: 100%;
-    background-repeat: no-repeat;
 }
 
 .logo-login {
@@ -20,7 +8,6 @@ body {
     padding-top: 20px;
     width: 300px;
 }
-
 
 .caixa-login {
     margin: 0 30px;
@@ -72,7 +59,3 @@ a {
 a:hover {
     text-decoration: underline;
 }
-
-
-
-
