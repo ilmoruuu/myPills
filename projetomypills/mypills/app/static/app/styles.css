@@ -9,13 +9,18 @@ body {
     width: 300px;
 }
 
+.logo-login{
+    padding-left: 20px; 
+    width: 150px;
+}
+
 .caixa-login {
     margin: 0 30px;
     display: flex;
     flex-direction: column;
     margin-top: 40px;
     border-radius: 10px;
-    background: rgba(0, 0, 0, 0.70);
+    background: #E4C7EE;
     padding: 40px 60px;  
     width: 400px;
 }
@@ -44,7 +49,8 @@ body {
     height: 40px;
     border-radius: 5px;
     border: none;
-    color: white;
+    color: black;
+    background-color: #000000;
 }
 
 .formulario-botoes:hover {
@@ -53,7 +59,7 @@ body {
 
 a {
     text-decoration: none;
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
 a:hover {

@@ -13,20 +13,20 @@
     <div class="background-filmes">
 
         <header class="container">
-            <img src="assets/logo.png" class="logo-login">
+            <img src="{% static 'app/imagens/Logo.png' %}" class="logo-login">
         </header>
 
         <div class="row flex-row justify-content-center">
             <div class="col-4 caixa-login">
-                <label style="font-size: 32px; color: white; font-weight: 660;">
-                    Entrar
+                <label style="font-size: 32px; color: #000000; font-weight: 660;">
+                    Cadastre-se
                 </label>
                 <form>
                     <div class="formulario">
                         <input
                         type="text"
                         class="caixa-formulario"
-                        placeholder="  Email ou número de celular">
+                        placeholder="  Email">
                         <br>
                         <input
                         type="password"
@@ -36,25 +36,15 @@
                         <input 
                         type="submit" 
                         class="formulario-botoes"
-                        style="background: #E50914;"
-                        value="Entrar">
+                        style="background: #C2E7D3;"
+                        value="Cadastre-se">
 
-                        <div style="color: #C0C0C0; margin: 5px 0;">OU</div>
+                        <div style="color: #000000; margin: 5px 0;">OU</div>
 
-                        <button class="formulario-botoes" style="background: rgba(218, 176, 176, 0.20);">
-                            Usar um código de acesso
+                        <button class="formulario-botoes" style="background: #C2E7D3">
+                            Entrar
                         </button>
-                        <a href="#" style="color: white; margin-top: 5px; margin-bottom: 10px;">Esqueceu a senha?</a>
                 </div>
-                    <input type="checkbox"> Lembre-se de mim
-                    <br>
-                    <br>
-                    <div>Novo por aqui?<a href="#">Assine agora</a>
-                    </div>
-                    <br>
-                    <div style="font-size: small; color:#989898">Esta página é protegida pelo Google reCAPTCHA para garantir que você não é um robô. 
-                        <a href="#" style="color: blue;">Saiba mais.</a>
-                    </div>
                 </form>
             </div>
         </div>
