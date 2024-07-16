@@ -10,17 +10,16 @@
     <title>Login</title>
 </head>
 <body>
-    <div class="background-filmes">
-
-        <header class="container">
-            <img src="{% static 'app/imagens/Logo.png' %}" class="logo-login">
-        </header>
-
+    <div class="container-principal">
+        <div class="container-logo">
+            <img src="{% static 'app/imagens/Logo.png'%}" class="logo-login">
+        </div>
         <div class="row flex-row justify-content-center">
             <div class="col-4 caixa-login">
-                <label style="font-size: 32px; color: rgb(0, 0, 0); font-weight: 660;">
-                    Entrar
+                <label style="font-size: 32px; color: rgba(0, 0, 0, 0.948); font-weight: 600; display: flex; justify-content: center;">
+                    Bem-vindo de volta!
                 </label>
+                <br>
                 <form>
                     <div class="formulario">
                         <input
@@ -33,18 +32,18 @@
                         class="caixa-formulario"
                         placeholder="  Senha">
                         <br>
-                       
-                        <button class="formulario-botoes" style="background: #C2E7D3">
-                            Cadastre-se
-                        </button>
-                        
-                        <div style="color: #000000; margin: 5px 0;">OU</div>
-
                         <button class="formulario-botoes" style="background: #C2E7D3">
                             Entrar
                         </button>
+                        <br>
+                        <div style="font-size: small; color:#989898">Não tem uma conta ainda? 
+                            <a href="{% url 'cadastro'%}" style="color: blue;"> Cadastre-se</a>
+                        </div>
                 </div>
                 </form>
+            </div>
+            <div class="banner-login">
+                <img src="{% static 'app/imagens/banner-login.png' %}">
             </div>
         </div>
     </div>

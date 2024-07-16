@@ -1,29 +1,53 @@
 body {
     background-color: #4C9E7C;
     color: rgb(212, 211, 211);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.logo-login {
-    padding-left: 150px;
-    padding-top: 20px;
-    width: 300px;
+.container-logo {
+    display: flex;
+    justify-content: left;
+    width: 900px;
 }
 
 .logo-login{
-    padding-left: 20px; 
+    margin-top: 20px;
     width: 150px;
 }
 
+.container-principal {
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
+
 .caixa-login {
-    margin: 0 30px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     margin-top: 40px;
-    border-radius: 10px;
-    background: #E4C7EE;
+    border-radius: 10px 0 0 10px;
+    background: rgb(255, 255, 255);
     padding: 40px 60px;  
-    width: 400px;
+    width: 450px;
+    height: 450px;
 }
+
+.banner-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 40px;
+    border-radius: 0 10px 10px 0;
+    background: rgb(255, 255, 255);
+    padding: 40px 60px;  
+    width: 450px;
+    height: 450px;
+    border-left: 2px solid rgb(233, 230, 230);
+}
+
 
 .caixa-login .formulario {
     display: flex;
@@ -34,14 +58,14 @@ body {
 
 .caixa-formulario {
     width: 310px;
-    height: 55px;
-    border-radius: 5px;
+    height: 45px;
+    border-radius: 8px;
     border: 1px solid #939393;
-    background: rgba(40, 35, 35, 0.6);
+    background: white;
 }
 
 .caixa-formulario::placeholder {
-    color: rgba(255, 255, 255, 0.9);
+    color: #939393;
 }
 
 .formulario-botoes {
