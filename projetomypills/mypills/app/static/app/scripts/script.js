@@ -1,3 +1,9 @@
 function paginaLogin() {
-    window.location.href = "{% url 'login' %}";
+    const loginButton = document.querySelector('[onclick="paginaLogin()"]');
+    if (loginButton) {
+        const url = loginButton.getAttribute('data-url');
+        if (url) {
+            window.location.href = url;
+        }
+    }
 }
