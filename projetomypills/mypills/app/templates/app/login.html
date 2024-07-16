@@ -11,18 +11,28 @@
 </head>
 <body>
     <div class="background-filmes">
+<<<<<<< HEAD
         <div class="container-principal">
             <div class="container-logo">
                 <img src="{% static 'app/imagens/Logo.png'%}" class="logo-login">
                 </div>
+=======
+
+        <header class="container">
+            <img src="{% static 'app/imagens/Logo.png' %}" class="logo-login">
+        </header>
+
+>>>>>>> parent of 38a8f3e (front-login design)
         <div class="row flex-row justify-content-center">
             <div class="col-4 caixa-login">
                 <label style="font-size: 32px; color: rgb(0, 0, 0); font-weight: 660;">
                     Entrar
+<<<<<<< HEAD
                 <label style="font-size: 32px; color: rgba(0, 0, 0, 0.948); font-weight: 600; display: flex; justify-content: center;">
                     Bem-vindo de volta!
+=======
+>>>>>>> parent of 38a8f3e (front-login design)
                 </label>
-                <br>
                 <form>
                     <div class="formulario">
                         <input
@@ -39,15 +49,8 @@
                         <button class="formulario-botoes" style="background: #C2E7D3">
                             Entrar
                         </button>
-                        <br>
-                        <div style="font-size: small; color:#989898">Não tem uma conta ainda? 
-                            <a href="{% url 'cadastro'%}" style="color: blue;"> Cadastre-se</a>
-                        </div>
                 </div>
                 </form>
-            </div>
-            <div class="banner-login">
-                <img src="{% static 'app/imagens/banner-login.png' %}">
             </div>
         </div>
     </div>
