@@ -4,13 +4,8 @@ body {
 }
 
 .logo-login {
-    padding-left: 150px;
-    padding-top: 20px;
-    width: 300px;
-}
-
-.logo-login{
-    padding-left: 20px; 
+    padding-left: 20px;
+    padding-top: 10px;
     width: 150px;
 }
 
@@ -65,3 +60,4 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
