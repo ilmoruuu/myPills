@@ -1,6 +1,7 @@
 body {
     background-color: #4C9E7C;
     color: rgb(212, 211, 211);
+<<<<<<< HEAD
 }
 
 .logo-login {
@@ -16,12 +17,23 @@ body {
     width: 900px;
 =======
 >>>>>>> parent of 38a8f3e (front-login design)
+=======
+}
+
+.logo-login {
+    padding-left: 150px;
+    padding-top: 20px;
+    width: 300px;
+>>>>>>> parent of 38a8f3e (front-login design)
 }
 
 .logo-login{
     padding-left: 20px; 
 <<<<<<< HEAD
+<<<<<<< HEAD
     margin-top: 20px;
+=======
+>>>>>>> parent of 38a8f3e (front-login design)
 =======
 >>>>>>> parent of 38a8f3e (front-login design)
     width: 150px;
@@ -38,6 +50,7 @@ body {
     width: 400px;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 .banner-login {
     display: flex;
@@ -58,6 +71,8 @@ body {
 
 =======
 >>>>>>> parent of 38a8f3e (front-login design)
+=======
+>>>>>>> parent of 38a8f3e (front-login design)
 .caixa-login .formulario {
     display: flex;
     flex-direction: column;
@@ -68,6 +83,7 @@ body {
     height: 55px;
     border-radius: 5px;
 <<<<<<< HEAD
+<<<<<<< HEAD
     height: 45px;
     border-radius: 8px;
     border: 1px solid #939393;
@@ -77,12 +93,19 @@ body {
     border: 1px solid #939393;
     background: rgba(40, 35, 35, 0.6);
 >>>>>>> parent of 38a8f3e (front-login design)
+=======
+    border: 1px solid #939393;
+    background: rgba(40, 35, 35, 0.6);
+>>>>>>> parent of 38a8f3e (front-login design)
 }
 
 .caixa-formulario::placeholder {
     color: rgba(255, 255, 255, 0.9);
 <<<<<<< HEAD
+<<<<<<< HEAD
     color: #939393;
+=======
+>>>>>>> parent of 38a8f3e (front-login design)
 =======
 >>>>>>> parent of 38a8f3e (front-login design)
 }
