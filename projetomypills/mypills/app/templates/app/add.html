@@ -1,13 +1,108 @@
 {% load static %}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" >
     <link rel="stylesheet" href="{% static 'app/styles.css' %}">
+    <style>
+        body {
+            background-image: url("{% static 'app/imagens/farmaciafundo.png' %}");
+            background-color: rgb(212, 211, 211);
+            color: #4C9E7C;
+        }
+        .topo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        .caixa-add {
+            /*margin: 0 30px;*/
+            display: flex;
+            flex-direction: column;
+            margin-top: 0px;
+            border-radius: 10px;
+            background: #c2e7d3d5;
+            padding: 20px 60px;
+            width: 900px;
+            box-shadow: #bbcec3 1px 1px 12px;
+        }
+        .caixa-add .formulario {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 15px;
+        }
+        .topo-botoes {
+            width: 175px;
+            height: 40px;
+            border-radius: 8px;
+            border: 2px solid white;
+            color: white;
+            background-color: #C2E7D3;
+            font-weight: 500;
+            margin-right: 10px;
+            text-shadow: #95a59c 1px 1px 10px;
+            box-shadow: #bbcec3 1px 1px 12px;
+        }
+    </style>
+    
     <title>Adicionar remédio ou consulta</title>
 </head>
 <body>
-    <h1>Adicionar remédio ou consulta </h1>
-    
+    <div class="background-filmes">
+
+        <header class="topo">
+            <img src="{% static 'app/imagens/Logo.png' %}" class="logo-login"  style="margin-right: 200px;">
+            <button class="topo-botoes">
+                MENU PRINCIPAL
+            </button>
+            <button class="topo-botoes">
+                MEUS REMÉDIOS
+            </button>
+            <button class="topo-botoes">
+                MINHAS CONSULTAS
+            </button>
+            <button class="topo-botoes">
+                MEU PERFIL
+            </button>
+        </header>
+
+        <div class="row flex-row justify-content-center">
+            <div class="col-4 caixa-add">
+                <label style="font-size: 32px; color: rgb(255, 255, 255); font-weight: 660; text-align: center; text-shadow: #95a59c 1px 1px 10px;">
+                    ADICIONAR ITEM
+                </label>
+                <form>
+                    <div class="formulario">
+                        <input
+                        type="text"
+                        class="caixa-formulario"
+                        placeholder="  Email">
+                        <br>
+                        <input
+                        type="password"
+                        class="caixa-formulario"
+                        placeholder="  Senha">
+                        <br>
+                       
+                        <button class="formulario-botoes" style="background: #C2E7D3">
+                            Cadastre-se
+                        </button>
+                        
+                        <div style="color: #000000; margin: 5px 0;">OU</div>
+
+                        <button class="formulario-botoes" style="background: #C2E7D3">
+                            Entrar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+    </div>
 </body>
 </html>
