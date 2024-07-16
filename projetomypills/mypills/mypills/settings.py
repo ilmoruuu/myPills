@@ -80,7 +80,7 @@ DATABASES = {
         'NAME': 'MyPills',
         'USER': 'postgres',
         'PASSWORD': 'ilmoru0407',
-        'HOST': 'loc'
+        'HOST': 'localhost'
     }
 }
 
