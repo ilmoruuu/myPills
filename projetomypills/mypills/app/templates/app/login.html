@@ -22,21 +22,23 @@
                     Bem-vindo de volta!
                 </label>
                 <br>
-                <form>
+                <form method="post">
                     <div class="formulario">
                         <input
                         type="text"
                         class="caixa-formulario"
-                        placeholder="  Email">
+                        placeholder="  Email"
+                        name="email">
                         <br>
                         <input
                         type="password"
                         class="caixa-formulario"
-                        placeholder="  Senha">
+                        placeholder="  Senha"
+                        name="senha">
                         <br>
-                        <button class="formulario-botoes" style="background:#74b4bb">
+                        <input type="submi" class="formulario-botoes" style="background:#74b4bb">
                             Entrar
-                        </button>
+                        </input>
                         <br>
                         <div style="font-size: small; color:#989898">Não tem uma conta ainda? 
                             <a href="{% url 'cadastro'%}" style="color: blue;"> Cadastre-se</a>
