@@ -152,7 +152,7 @@ def connect_bd():
         conn = psycopg2.connect(
             dbname="MyPills",
             user="postgres",
-            password="ilmoru0407",
+            password="marialaiz1",
             host="localhost",
             port="5432"
         )

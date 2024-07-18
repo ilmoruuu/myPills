@@ -22,6 +22,9 @@
                     Bem-vindo de volta!
                 </label>
                 <br>
+                {% if mensagem %}
+                    <div style="color: red;">  {{ mensagem }}</div>
+                {% endif %}
                 <form method="post">
                     {% csrf_token %}
                     <div class="formulario">
