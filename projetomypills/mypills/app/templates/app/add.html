@@ -132,6 +132,7 @@
                         ADICIONAR REMÉDIO
                     </label>
                     <form method="post">
+                        {% csrf_token %}
                         <div class="formulario">
                             <div>
                                 <label style="font-size: 13px;
@@ -226,6 +227,7 @@
                         ADICIONAR CONSULTA
                     </label>
                     <form method="post">
+                        {% csrf_token %}
                         <div class="formulario">
                             <div>
                                 <label style="font-size: 13px;
