@@ -79,7 +79,11 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'MyPills',
         'USER': 'postgres',
+<<<<<<< HEAD
         'PASSWORD': 'ilmoru0407',
+=======
+        'PASSWORD': 'marialaiz1',
+>>>>>>> 3b9c678b32d10435f040554b8d42b24459e277f5
         'HOST': 'localhost'
     }
 }
