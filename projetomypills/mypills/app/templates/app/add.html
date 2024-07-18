@@ -131,7 +131,7 @@
                     justify-content: center;">
                         ADICIONAR REMÉDIO
                     </label>
-                    <form>
+                    <form method="post">
                         <div class="formulario">
                             <div>
                                 <label style="font-size: 13px;
@@ -145,6 +145,7 @@
                                 class="caixinha-add"
                                 list="remedios"
                                 placeholder="  Nome da medicação"
+                                name="remedio"
                                 required>
                                 <datalist id="remedios">
                                     <option value="Paracetamol">
@@ -163,7 +164,8 @@
                                 </label>
                                 <input class="caixinha-add"
                                 type="text"
-                                placeholder="  XXml a cada X horas">
+                                placeholder="  XXml a cada X horas"
+                                name="dosagem">
                             </div>
                             <br>
                             <div>
@@ -176,7 +178,8 @@
                                 </label>
                                 <input class="caixinha-add"
                                 type="text"
-                                placeholder="  Lote informado na embalagem">
+                                placeholder="  Lote informado na embalagem"
+                                name="lote">
                             </div>
                             <br>
                             <div class="datas">
@@ -188,7 +191,7 @@
                                     justify-content: left;">
                                         DATA DE FABRICAÇÃO:
                                     </label>
-                                    <input class="caixinha-data" type="date"/>
+                                    <input class="caixinha-data" type="date" name="fabricacao">
                                 </div>
                                 <div class="data">
                                     <label style="font-size: 13px;
@@ -198,7 +201,7 @@
                                     justify-content: left;">
                                         DATA DE VALIDADE:
                                     </label>
-                                    <input class="caixinha-data" type="date"/>
+                                    <input class="caixinha-data" type="date" />
                                 </div>
                             </div>
                             <br>

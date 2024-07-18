@@ -10,7 +10,7 @@ def login(request):
         email = request.POST["email"]
         senha = request.POST["senha"]
 
-        cursor = connect_db().cursor()
+        cursor = connect_bd().cursor()
         cursor.execute("SELECT senha FROM paciente WHERE email = %s", (email,))
         resultado = cursor.fetchone()
         if (resultado):
@@ -30,6 +30,8 @@ def login(request):
         return render(request, 'app/login.html')
 
 def cadastro(request):
+    cursor = connect_bd().cursor()
+    cursor.execute()()
     return render(request, 'app/cadastro.html')
 
 def remedios(request):
@@ -46,7 +48,7 @@ def perfil(request, user):
 def add(request):
     return render(request, 'app/add.html')
 
-def connect_db():
+def connect_bd():
     try:
         conn = psycopg2.connect(
             dbname="MyPills",
