@@ -9,44 +9,91 @@
     <link rel="stylesheet" href="{% static 'app/styles.css' %}">
     <style>
         body {
-            background-image: url("{% static 'app/imagens/farmaciafundo.png' %}");
-            background-color: rgb(212, 211, 211);
-            color: #4C9E7C;
+            /*background-image: url("{% static 'app/imagens/farmaciafundo.png' %}");*/
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-color:#74b4bb;
         }
+
         .topo {
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 0;
         }
+
         .caixa-add {
-            /*margin: 0 30px;*/
             display: flex;
             flex-direction: column;
-            margin-top: 0px;
-            border-radius: 10px;
-            background: #c2e7d3d5;
-            padding: 20px 60px;
-            width: 900px;
-            box-shadow: #bbcec3 1px 1px 12px;
+            justify-content: center;
+            margin-top: 40px;
+            border-radius: 10px 0 0 10px;
+            background: rgb(255, 255, 255);
+            opacity: 0.85;
+            padding: 40px 60px;  
+            width: 450px;
+            height: 450px;
         }
-        .caixa-add .formulario {
+        
+        .caixa-add .selec-remedios {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 15px;
+            margin-top: 20px;
         }
+
+        .banner-add {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-top: 40px;
+            border-radius: 0 10px 10px 0;
+            background: rgb(255, 255, 255);
+            opacity: 0.85;
+            padding: 40px 60px;  
+            width: 450px;
+            height: 450px;
+            border-left: 2px solid rgb(233, 230, 230);
+        }
+
         .topo-botoes {
             width: 175px;
             height: 40px;
             border-radius: 8px;
             border: 2px solid white;
             color: white;
-            background-color: #C2E7D3;
+            background-color: #74b4bb;
             font-weight: 500;
             margin-right: 10px;
-            text-shadow: #95a59c 1px 1px 10px;
-            box-shadow: #bbcec3 1px 1px 12px;
+        }
+
+        .datas {
+            margin: 0rem;
+            padding: 0rem 0rem;
+            text-align: left;
+        }
+        
+        .data {
+            display: inline-block;
+            padding: 0rem 0rem;
+            margin-right: 15px;
+            vertical-align: middle;
+        }
+
+        .caixinha-add {
+            width: 310px;
+            height: 40px;
+            border-radius: 8px;
+            border: 1px solid #939393;
+            background: white;
+        }
+
+        .caixinha-data{
+            width: 130px;
+            height: 32px;
+            border-radius: 8px;
+            border: 1px solid #939393;
+            background: white;
         }
     </style>
     
@@ -56,7 +103,9 @@
     <div class="background-filmes">
 
         <header class="topo">
-            <img src="{% static 'app/imagens/Logo.png' %}" class="logo-login"  style="margin-right: 200px;">
+            <img src="{% static 'app/imagens/Logo.png' %}"
+            class="logo-login"
+            style="margin-right: 200px;">
             <button class="topo-botoes">
                 MENU PRINCIPAL
             </button>
@@ -71,38 +120,162 @@
             </button>
         </header>
 
-        <div class="row flex-row justify-content-center">
-            <div class="col-4 caixa-add">
-                <label style="font-size: 32px; color: rgb(255, 255, 255); font-weight: 660; text-align: center; text-shadow: #95a59c 1px 1px 10px;">
-                    ADICIONAR ITEM
-                </label>
-                <form>
-                    <div class="formulario">
-                        <input
-                        type="text"
-                        class="caixa-formulario"
-                        placeholder="  Email">
-                        <br>
-                        <input
-                        type="password"
-                        class="caixa-formulario"
-                        placeholder="  Senha">
-                        <br>
-                       
-                        <button class="formulario-botoes" style="background: #C2E7D3">
-                            Cadastre-se
-                        </button>
-                        
-                        <div style="color: #000000; margin: 5px 0;">OU</div>
-
-                        <button class="formulario-botoes" style="background: #C2E7D3">
-                            Entrar
-                        </button>
-                    </div>
-                </form>
+        <div class="container-principal">
+            <div class="row flex-row justify-content-center">
+                <div class="caixa-add">
+                    <label style="font-size: 29px;
+                    color: rgba(0, 0, 0, 0.948);
+                    font-weight: 660;
+                    display: flex;
+                    justify-content: center;">
+                        ADICIONAR REMÉDIO
+                    </label>
+                    <form>
+                        <div class="formulario">
+                            <div>
+                                <label style="font-size: 13px;
+                                color: rgba(0, 0, 0, 0.948);
+                                font-weight: 620;
+                                display: flex;
+                                justify-content: left;">
+                                    REMÉDIO:
+                                </label>
+                                <input name="remedio"
+                                class="caixinha-add"
+                                list="remedios"
+                                placeholder="  Nome da medicação"
+                                required>
+                                <datalist id="remedios">
+                                    <option value="Paracetamol">
+                                    <option value="Alegra">
+                                    <option value="Buscofem">
+                                </datalist>
+                            </div>
+                            <br>
+                            <div>
+                                <label style="font-size: 13px;
+                                color: rgba(0, 0, 0, 0.948);
+                                font-weight: 620;
+                                display: flex;
+                                justify-content: left;">
+                                    DOSAGEM:
+                                </label>
+                                <input class="caixinha-add"
+                                type="text"
+                                placeholder="  XXml a cada X horas">
+                            </div>
+                            <br>
+                            <div>
+                                <label style="font-size: 13px;
+                                color: rgba(0, 0, 0, 0.948);
+                                font-weight: 620;
+                                display: flex;
+                                justify-content: left;">
+                                    LOTE:
+                                </label>
+                                <input class="caixinha-add"
+                                type="text"
+                                placeholder="  Lote informado na embalagem">
+                            </div>
+                            <br>
+                            <div class="datas">
+                                <div class="data">
+                                    <label style="font-size: 13px;
+                                    color: rgba(0, 0, 0, 0.948);
+                                    font-weight: 620;
+                                    display: flex;
+                                    justify-content: left;">
+                                        DATA DE FABRICAÇÃO:
+                                    </label>
+                                    <input class="caixinha-data" type="date"/>
+                                </div>
+                                <div class="data">
+                                    <label style="font-size: 13px;
+                                    color: rgba(0, 0, 0, 0.948);
+                                    font-weight: 620;
+                                    display: flex;
+                                    justify-content: left;">
+                                        DATA DE VALIDADE:
+                                    </label>
+                                    <input class="caixinha-data" type="date"/>
+                                </div>
+                            </div>
+                            <br>
+                            <button class="formulario-botoes" style="border-radius: 8px;
+                                border: 2px solid white;
+                                color: white;
+                                background-color: #74b4bb;
+                                font-weight: 500;
+                                margin-right: 10px;">
+                                ADICIONAR
+                            </button>
+                            <br>
+                        </div>
+                    </form>
+                </div>
+                <div class="banner-add">
+                    <label style="font-size: 29px;
+                    color: rgba(0, 0, 0, 0.948);
+                    font-weight: 660;
+                    display: flex;
+                    justify-content: center;">
+                        ADICIONAR CONSULTA
+                    </label>
+                    <form>
+                        <div class="formulario">
+                            <div>
+                                <label style="font-size: 13px;
+                                color: rgba(0, 0, 0, 0.948);
+                                font-weight: 620;
+                                display: flex;
+                                justify-content: left;">
+                                    MÉDICO:
+                                </label>
+                                <input class="caixinha-add"
+                                type="text"
+                                placeholder="  Nome do profissional"
+                                required>
+                            </div>
+                            <br>
+                            <div>
+                                <label style="font-size: 13px;
+                                color: rgba(0, 0, 0, 0.948);
+                                font-weight: 620;
+                                display: flex;
+                                justify-content: left;">
+                                    LOCAL:
+                                </label>
+                                <input class="caixinha-add"
+                                type="text"
+                                placeholder="  Endereço do local da consulta">
+                            </div>
+                            <br>
+                            <div>
+                                <label style="font-size: 13px;
+                                color: rgba(0, 0, 0, 0.948);
+                                font-weight: 620;
+                                display: flex;
+                                justify-content: left;">
+                                    DATA E HORA:
+                                </label>
+                                <input class="caixinha-add"
+                                type="datetime-local">
+                            </div>
+                            <br>
+                            <button class="formulario-botoes" style="border-radius: 8px;
+                                border: 2px solid white;
+                                color: white;
+                                background-color: #74b4bb;
+                                font-weight: 500;
+                                margin-right: 10px;">
+                                ADICIONAR
+                            </button>
+                            <br>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-        
     </div>
 </body>
 </html>
