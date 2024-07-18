@@ -49,17 +49,29 @@
             text-shadow: #95a59c 1px 1px 10px;
             box-shadow: #bbcec3 1px 1px 12px;
         }
+        .menu {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-top: 60px;
+            border-radius: 50% 20% / 10% 40%;;
+            background: rgb(255, 255, 255);
+            padding: 40px 60px;  
+            width: 1000px;
+            height: 500px;
+        }
+
     </style>
     
     <title>Menu Principal</title>
 </head>
 <body>
-    <div class="background-filmes">
+    <div class="header">
 
         <header class="topo">
             <img src="{% static 'app/imagens/Logo.png' %}" class="logo-login"  style="margin-right: 200px;">
             <button class="topo-botoes">
-                MENU PRINCIPAL
+                ADICIONAR
             </button>
             <button class="topo-botoes">
                 MEUS REMÉDIOS
@@ -71,6 +83,18 @@
                 MEU PERFIL
             </button>
         </header>
+
+        <div class="main">
+            <div class="menu">
+                <label style="font-size: 32px; color: rgba(0, 0, 0, 0.948); font-weight: 600; display: flex; justify-content: center;">
+                    Bem-vindo(a) ao MyPills!
+                </label>
+                <p>
+
+                </p>
+                
+            </div>
+        </div>
         
     </div>
 </body>
