@@ -201,11 +201,11 @@
                                     justify-content: left;">
                                         DATA DE VALIDADE:
                                     </label>
-                                    <input class="caixinha-data" type="date" />
+                                    <input class="caixinha-data" type="date" name="validade"/>
                                 </div>
                             </div>
                             <br>
-                            <button class="formulario-botoes" style="border-radius: 8px;
+                            <button name="add_remedio" type="submit" class="formulario-botoes" style="border-radius: 8px;
                                 border: 2px solid white;
                                 color: white;
                                 background-color: #74b4bb;
@@ -225,7 +225,7 @@
                     justify-content: center;">
                         ADICIONAR CONSULTA
                     </label>
-                    <form>
+                    <form method="post">
                         <div class="formulario">
                             <div>
                                 <label style="font-size: 13px;
@@ -238,7 +238,8 @@
                                 <input class="caixinha-add"
                                 type="text"
                                 placeholder="  Nome do profissional"
-                                required>
+                                required
+                                name="medico">
                             </div>
                             <br>
                             <div>
@@ -251,7 +252,8 @@
                                 </label>
                                 <input class="caixinha-add"
                                 type="text"
-                                placeholder="  Endereço do local da consulta">
+                                placeholder="  Endereço do local da consulta"
+                                name="local">
                             </div>
                             <br>
                             <div>
@@ -266,7 +268,7 @@
                                 type="datetime-local">
                             </div>
                             <br>
-                            <button class="formulario-botoes" style="border-radius: 8px;
+                            <button name="add_consulta" type="submit" class="formulario-botoes" style="border-radius: 8px;
                                 border: 2px solid white;
                                 color: white;
                                 background-color: #74b4bb;
