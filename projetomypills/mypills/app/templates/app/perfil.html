@@ -9,9 +9,194 @@
     <link rel="stylesheet" href="{% static 'app/styles.css' %}">
     <link rel="shortcut icon" href="{% static 'app/imagens/Logo.png'%}" type="image/x-icon">
     <title>Página principal</title>
+    <style>
+        body {
+            /*background-image: url("{% static 'app/imagens/farmaciafundo.png' %}");*/
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-color:#74b4bb;
+        }
+
+        label {
+            display: block;
+            width: 175px;
+            background-color: #74b4bb;
+            color: white;
+            padding: 12px;
+            margin: 10px auto;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .topo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .topo-botoes {
+            width: 175px;
+            height: 40px;
+            border-radius: 8px;
+            border: 2px solid black;
+            color: black;
+            background-color: #acd4d8;
+            font-weight: 500;
+            margin-right: 10px;
+        }
+
+        .first-column {
+            width: 30%;
+            height: 526px;
+            padding: 20px 0 0 0;
+            border-radius: 15px;
+            background-color:white;
+            opacity: 0.85;
+            float: left;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .second-column {
+            width: 70%;
+            height: 526px;
+            padding: 20px 0 0 0;
+            border-radius: 15px;
+            background-color:#acd4d8;
+            float: right;
+        }
+        
+        .perfil-card img{
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+        }
+
+        @media only screen and (max-width: 800px) {
+
+            .first-column {
+                width: 100%;
+                padding-bottom: 10px;
+                float: none;
+            }
+
+            .second-column {
+                width: 100%;
+                padding-bottom: 10px;
+                float: none;
+            }
+
+        }
+    </style>
 </head>
 <body>
-    <h1>Esta é a página de perfil do usuário {{ user }} </h1>
-    
+    <div class="background-filmes">
+        <header class="topo">
+            <img src="{% static 'app/imagens/Logo.png' %}"
+            class="logo-login"
+            style="margin-right: 200px;">
+            <button class="topo-botoes" id="principal">
+                MENU PRINCIPAL
+            </button>
+            <button class="topo-botoes" id="remedios">
+                MEUS REMÉDIOS
+            </button>
+            <button class="topo-botoes" id="consultas">
+                MINHAS CONSULTAS
+            </button>
+            <button class="topo-botoes" id="add">
+                ADICIONAR
+            </button>
+        </header>
+
+        <div class="blocao">
+            <div class="first-column justify-content-between align-items-center">
+                <div class="perfil-card">
+                    <input type="file" accept="image/jpeg, image/png, image/jpg" id="inputfile" onchange="loadInputFile(event)" style="display: none">
+                    <img src="{% static 'app/imagens/blankpfp.png' %}" id="profilepic">
+                    <label for="inputfile">MUDAR FOTO</label>
+                </div>
+            </div>
+            <div class="second-column">
+                <form>
+                    <div class="formulario">
+                        <input
+                        type="text"
+                        class="caixa-formulario"
+                        placeholder="  Nome">
+                        <br>
+                        <input
+                        type="text"
+                        class="caixa-formulario"
+                        placeholder="  Email">
+                        <br>
+                        <input
+                        type="password"
+                        class="caixa-formulario"
+                        placeholder="  Senha">
+                        <br>
+                        <input
+                        type="password"
+                        class="caixa-formulario"
+                        placeholder="  Idade">
+                        <br>
+                        <input
+                        type="password"
+                        class="caixa-formulario"
+                        placeholder="  CPF">
+                        <br>
+                        <input
+                        type="password"
+                        class="caixa-formulario"
+                        placeholder="  Peso">
+                        <br>
+                        <input
+                        type="password"
+                        class="caixa-formulario"
+                        placeholder="  Altura">
+                        <br>
+                        <input
+                        type="password"
+                        class="caixa-formulario"
+                        placeholder="  Gênero">
+                        <br>
+                        <input
+                        type="password"
+                        class="caixa-formulario"
+                        placeholder="  Comorbidade">
+                    </div>
+                </form>
+            </div>  
+        </div>
+           
+    </div>
+<script>
+    var loadInputFile = function(event) {
+        var image = document.getElementById('profilepic');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
+<script type="text/javascript">
+    document.getElementById("principal").onclick = function () {
+        location.href = "http://127.0.0.1:8000/";
+    };
+    </script>
+<script type="text/javascript">
+    document.getElementById("remedios").onclick = function () {
+        location.href = "http://127.0.0.1:8000/remedios/";
+    };
+    </script>
+<script type="text/javascript">
+    document.getElementById("consultas").onclick = function () {
+        location.href = "http://127.0.0.1:8000/consultas/";
+    };
+    </script>
+<script type="text/javascript">
+    document.getElementById("add").onclick = function () {
+        location.href = "http://127.0.0.1:8000/add/";
+    };
+</script>
 </body>
 </html>
