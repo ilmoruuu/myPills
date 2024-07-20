@@ -36,9 +36,23 @@
         .tabela{
             width: 900px;
             height: 100px;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 10px;
             background-color: white;
             color: black;
+            overflow: hidden;
             
+        }
+
+        .tabela th {
+            border: 1px solid black;
+
+        }
+
+        .tabela td {
+            border: 1px solid black;
+
         }
 
         .topo-tabela{
@@ -46,6 +60,9 @@
             position: sticky;
             top: 0;
 
+        }
+        .coluna {
+            outline: 1px solid black;
         }
 
 
@@ -71,7 +88,11 @@
     </header>
     <br>
     <div>
+        <title class="titulo">Remédios</title>
         <table class="tabela">
+            <colgroup class="coluna">
+                <col>
+            </colgroup>
             <thead>
                 <tr class="topo-tabela">
                     <th>Nome do Remédio</th>
