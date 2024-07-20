@@ -17,9 +17,9 @@
             background-color:#74b4bb;
         }
 
-        label {
+        .botao-perfil {
             display: block;
-            width: 175px;
+            width: 250px;
             background-color: #74b4bb;
             color: white;
             padding: 12px;
@@ -47,11 +47,25 @@
             margin-right: 10px;
         }
 
+        .datas {
+            margin: 0rem;
+            padding: 0rem 0rem;
+            text-align: center;
+            margin-left: 18px;
+        }
+        
+        .data {
+            display: inline-block;
+            padding: 0rem 0rem;
+            margin-right: 15px;
+            vertical-align: middle;
+        }
+
         .first-column {
             width: 30%;
-            height: 526px;
-            padding: 20px 0 0 0;
-            border-radius: 15px;
+            height: 500px;
+            padding: 40px 0 0 0;
+            border-radius: 15px 0 0 15px;
             background-color:white;
             opacity: 0.85;
             float: left;
@@ -61,11 +75,13 @@
 
         .second-column {
             width: 70%;
-            height: 526px;
-            padding: 20px 0 0 0;
-            border-radius: 15px;
+            height: 500px;
+            padding: 40px 90px;  
+            border-radius: 0 15px 15px 0;
             background-color:#acd4d8;
             float: right;
+            justify-content: center;
+            text-align: center;
         }
         
         .perfil-card img{
@@ -116,56 +132,150 @@
                 <div class="perfil-card">
                     <input type="file" accept="image/jpeg, image/png, image/jpg" id="inputfile" onchange="loadInputFile(event)" style="display: none">
                     <img src="{% static 'app/imagens/blankpfp.png' %}" id="profilepic">
-                    <label for="inputfile">MUDAR FOTO</label>
+                    <label class="botao-perfil" style="width: 175px;" for="inputfile">MUDAR FOTO</label>
                 </div>
             </div>
             <div class="second-column">
                 <form>
                     <div class="formulario">
+                        <label style="font-size: 13px;
+                        color: rgba(0, 0, 0, 0.948);
+                        font-weight: 620;
+                        display: flex;
+                        text-align: left;
+                        padding: 0 25px;">
+                            NOME COMPLETO:
+                        </label>
                         <input
                         type="text"
                         class="caixa-formulario"
-                        placeholder="  Nome">
+                        style="width: 550px"
+                        placeholder="{{ user.nome }}">
                         <br>
-                        <input
-                        type="text"
-                        class="caixa-formulario"
-                        placeholder="  Email">
                         <br>
-                        <input
-                        type="password"
-                        class="caixa-formulario"
-                        placeholder="  Senha">
+                        <div class="datas">
+                            <div class="data">
+                                <label style="font-size: 13px;
+                                color: rgba(0, 0, 0, 0.948);
+                                font-weight: 620;
+                                display: flex;
+                                text-align: left;">
+                                    E-MAIL:
+                                </label>
+                                <input
+                                type="text"
+                                class="caixa-formulario"
+                                placeholder="{{ user.email }}">
+                            </div>
+                            <div class="data">
+                                <label style="font-size: 13px;
+                                color: rgba(0, 0, 0, 0.948);
+                                font-weight: 620;
+                                display: flex;
+                                text-align: left;">
+                                    SENHA:
+                                </label>
+                                <input
+                                type="password"
+                                class="caixa-formulario"
+                                style="width: 220px"
+                                placeholder="{{ user.senha }}">
+                            </div>
+                        </div>
                         <br>
-                        <input
-                        type="password"
-                        class="caixa-formulario"
-                        placeholder="  Idade">
+                        <div class="datas">
+                            <div class="data">
+                                <label style="font-size: 13px;
+                                color: rgba(0, 0, 0, 0.948);
+                                font-weight: 620;
+                                display: flex;
+                                text-align: left;">
+                                    IDADE:
+                                </label>
+                                <input
+                                type="password"
+                                class="caixa-formulario"
+                                style="width: 70px"
+                                placeholder="{{ user.idade }}">
+                            </div>
+                            <div class="data">
+                                <label style="font-size: 13px;
+                                color: rgba(0, 0, 0, 0.948);
+                                font-weight: 620;
+                                display: flex;
+                                text-align: left;">
+                                    PESO (KG):
+                                </label>
+                                <input
+                                type="password"
+                                class="caixa-formulario"
+                                style="width: 100px"
+                                placeholder="{{ user.peso }}">
+                            </div>
+                            <div class="data">
+                                <label style="font-size: 13px;
+                                color: rgba(0, 0, 0, 0.948);
+                                font-weight: 620;
+                                display: flex;
+                                text-align: left;">
+                                    ALTURA (M):
+                                </label>
+                                <input
+                                type="password"
+                                class="caixa-formulario"
+                                style="width: 100px"
+                                placeholder="{{ user.altura }}">
+                            </div>
+                            <div class="data">
+                                <label style="font-size: 13px;
+                                color: rgba(0, 0, 0, 0.948);
+                                font-weight: 620;
+                                display: flex;
+                                text-align: left;">
+                                    CPF:
+                                </label>
+                                <input
+                                type="password"
+                                class="caixa-formulario"
+                                style="width: 220px"
+                                placeholder="{{ user.cpf }}">
+                            </div>
+                        </div>
                         <br>
-                        <input
-                        type="password"
-                        class="caixa-formulario"
-                        placeholder="  CPF">
+                        <div class="datas">
+                            <div class="data">
+                                <label style="font-size: 13px;
+                                color: rgba(0, 0, 0, 0.948);
+                                font-weight: 620;
+                                display: flex;
+                                text-align: left;">
+                                    GÊNERO:
+                                </label>
+                                <input
+                                type="text"
+                                class="caixa-formulario"
+                                style="width: 130px"
+                                placeholder="{{ user.genero }}">
+                            </div>
+                            <div class="data">
+                                <label style="font-size: 13px;
+                                color: rgba(0, 0, 0, 0.948);
+                                font-weight: 620;
+                                display: flex;
+                                text-align: left;">
+                                    COMORBIDADE(S):
+                                </label>
+                                <input
+                                type="password"
+                                class="caixa-formulario"
+                                style="width: 400px"
+                                placeholder="{{ user.comorbidade }}">
+                            </div>
+                        </div>
                         <br>
-                        <input
-                        type="password"
-                        class="caixa-formulario"
-                        placeholder="  Peso">
-                        <br>
-                        <input
-                        type="password"
-                        class="caixa-formulario"
-                        placeholder="  Altura">
-                        <br>
-                        <input
-                        type="password"
-                        class="caixa-formulario"
-                        placeholder="  Gênero">
-                        <br>
-                        <input
-                        type="password"
-                        class="caixa-formulario"
-                        placeholder="  Comorbidade">
+                        <button class="botao-perfil" id="salvar" >
+                            SALVAR ALTERAÇÕES
+                        </button>
                     </div>
                 </form>
             </div>  
