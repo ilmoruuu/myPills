@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'app/styles.css' %}">
     <link rel="shortcut icon" href="{% static 'app/imagens/Logo.png'%}" type="image/x-icon">
     <title>Remédios</title>
+    
     <style>
         body {
             background-repeat: no-repeat;
@@ -22,6 +23,14 @@
             position: fixed;
             top: 0;
             width: 100%;
+            z-index: 1000;
+        }
+        .tit {
+            font-size: 25px;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
         .topo-botoes {
             width: 175px;
@@ -33,40 +42,35 @@
             font-weight: 500;
             margin-right: 10px;
         }
-        .tabela{
-            width: 900px;
-            height: 100px;
-            border-collapse: separate;
-            border-spacing: 0;
-            border-radius: 10px;
+        .container {
+            margin-top: 80px;
+            padding: 20px;
+        }
+        .tabela-container {
+            max-height: 500px;
+            overflow-y: auto; 
+        }
+        .tabela {
+            width: 100%;
+            border-radius: 20px;
             background-color: white;
-            color: black;
-            overflow: hidden;
-            
+            color: rgb(59, 55, 55);
+            border-collapse: collapse;
         }
-
-        .tabela th {
-            border: 1px solid black;
-
-        }
-
-        .tabela td {
-            border: 1px solid black;
-
-        }
-
-        .topo-tabela{
+        .tabela th, .tabela td {
+            padding: 15px;
             text-align: center;
-            position: sticky;
+        }
+        .tabela th {
+            position: -webkit-sticky;
+            position: sticky; 
             top: 0;
-
+            color: rgb(59, 55, 55); 
+            z-index: 100; 
         }
-        .coluna {
-            outline: 1px solid black;
-        }
-
 
     </style>
+    
 </head>
 <body>
     <header class="topo">
@@ -87,12 +91,9 @@
         </button>
     </header>
     <br>
-    <div>
-        <title class="titulo">Remédios</title>
+    <div class="container">
+        <h3 class="tit">Remédios Adicionados:</h3>
         <table class="tabela">
-            <colgroup class="coluna">
-                <col>
-            </colgroup>
             <thead>
                 <tr class="topo-tabela">
                     <th>Nome do Remédio</th>
@@ -102,10 +103,11 @@
                     <th>Data de Validade</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="corpo-tabela">
                 <tr>
                     <td>
-                        <!--aqui é onde entra as informações do back-->
+                        <!--aqui vai aumentar o tamanho de acordo com a quantidade de dados-->
+                        oi
                     </td>
                 </tr>
             </tbody>
@@ -130,6 +132,46 @@
         document.getElementById("perfil").onclick = function () {
             location.href = "http://127.0.0.1:8000/perfil/1";
         };
+    </script>
+    <script>
+          async function fetchData() {
+            try {
+            const response = await fetch('mudar para URl de acesso do back');
+            
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+            
+            populateTable(data);
+            } catch (error) {
+            console.error('Erro ao buscar dados:', error);
+            }
+        }
+
+        function populateTable(data) {
+            const tableBody = document.querySelector('.corpo-tabela');
+
+            tableBody.innerHTML = '';
+
+
+            data.forEach(item => {
+            const row = document.createElement('tr');
+
+            row.innerHTML = `
+                <td>${item.nome_comercial}</td>
+                <td>${item.dosagem}</td>
+                <td>${item.lote}</td>
+                <td>${item.data_fabricacao}</td>
+                <td>${item.data_vencimento}</td>
+            `;
+
+            tableBody.appendChild(row);
+            });
+        }
+
+        fetchData();
     </script>
 </body>
 </html>
