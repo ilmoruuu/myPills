@@ -135,25 +135,25 @@
                 </div>
             </div>
             <div class="second-column">
-                <form>
+                <form method="post">
+                    {% csrf_token %}
                     <div class="formulario">
                         <label style="font-size: 13px;
                         color: rgba(0, 0, 0, 0.948);
                         font-weight: 620;
                         display: flex;
                         text-align: left;
-                        padding: 0 25px;">
+                        padding: 0 25px;"
+                        disabled>
                             NOME COMPLETO:
                         </label>
                         <input
                         type="text"
                         class="caixa-formulario"
-<<<<<<< Updated upstream
                         style="width: 550px"
-                        placeholder="{{ user.nome }}">
-=======
-                        placeholder="  {{user.nome}}">
->>>>>>> Stashed changes
+                        value="{{ user.nome }}"
+                        name="nome"
+                        disabled>
                         <br>
                         <br>
                         <div class="datas">
@@ -162,27 +162,33 @@
                                 color: rgba(0, 0, 0, 0.948);
                                 font-weight: 620;
                                 display: flex;
-                                text-align: left;">
+                                text-align: left;"
+                                disabled>
                                     E-MAIL:
                                 </label>
                                 <input
                                 type="text"
                                 class="caixa-formulario"
-                                placeholder="{{ user.email }}">
+                                value="{{ user.email }}"
+                                name="email"
+                                disabled>
                             </div>
                             <div class="data">
                                 <label style="font-size: 13px;
                                 color: rgba(0, 0, 0, 0.948);
                                 font-weight: 620;
                                 display: flex;
-                                text-align: left;">
+                                text-align: left;"
+                                disabled>
                                     SENHA:
                                 </label>
                                 <input
                                 type="password"
                                 class="caixa-formulario"
                                 style="width: 220px"
-                                placeholder="{{ user.senha }}">
+                                value="{{ user.senha }}"
+                                name="senha"
+                                disabled>
                             </div>
                         </div>
                         <br>
@@ -192,42 +198,51 @@
                                 color: rgba(0, 0, 0, 0.948);
                                 font-weight: 620;
                                 display: flex;
-                                text-align: left;">
+                                text-align: left;"
+                                disabled>
                                     IDADE:
                                 </label>
                                 <input
-                                type="password"
+                                type="number"
                                 class="caixa-formulario"
                                 style="width: 70px"
-                                placeholder="{{ user.idade }}">
+                                value="{{ user.idade }}"
+                                name="idade"
+                                disabled>
                             </div>
                             <div class="data">
                                 <label style="font-size: 13px;
                                 color: rgba(0, 0, 0, 0.948);
                                 font-weight: 620;
                                 display: flex;
-                                text-align: left;">
+                                text-align: left;"
+                                disabled>
                                     PESO (KG):
                                 </label>
                                 <input
-                                type="password"
+                                type="number"
                                 class="caixa-formulario"
                                 style="width: 100px"
-                                placeholder="{{ user.peso }}">
+                                value="{{ user.peso }}"
+                                name="peso"
+                                disabled>
                             </div>
                             <div class="data">
                                 <label style="font-size: 13px;
                                 color: rgba(0, 0, 0, 0.948);
                                 font-weight: 620;
                                 display: flex;
-                                text-align: left;">
+                                text-align: left;"
+                                disabled>
                                     ALTURA (M):
                                 </label>
                                 <input
-                                type="password"
+                                type="number"
                                 class="caixa-formulario"
                                 style="width: 100px"
-                                placeholder="{{ user.altura }}">
+                                value="{{ user.altura }}"
+                                name="altura"
+                                disabled>
                             </div>
                             <div class="data">
                                 <label style="font-size: 13px;
@@ -238,10 +253,12 @@
                                     CPF:
                                 </label>
                                 <input
-                                type="password"
+                                type="number"
                                 class="caixa-formulario"
                                 style="width: 220px"
-                                placeholder="{{ user.cpf }}">
+                                value="{{ user.cpf }}"
+                                name="cpf"
+                                disabled>
                             </div>
                         </div>
                         <br>
@@ -251,34 +268,45 @@
                                 color: rgba(0, 0, 0, 0.948);
                                 font-weight: 620;
                                 display: flex;
-                                text-align: left;">
+                                text-align: left;"
+                                disabled>
                                     GÊNERO:
                                 </label>
                                 <input
                                 type="text"
                                 class="caixa-formulario"
                                 style="width: 130px"
-                                placeholder="{{ user.genero }}">
+                                value="{{ user.genero }}"
+                                name="genero"
+                                disabled>
                             </div>
                             <div class="data">
                                 <label style="font-size: 13px;
                                 color: rgba(0, 0, 0, 0.948);
                                 font-weight: 620;
                                 display: flex;
-                                text-align: left;">
+                                text-align: left;"
+                                disabled>
                                     COMORBIDADE(S):
                                 </label>
                                 <input
-                                type="password"
+                                type="text"
                                 class="caixa-formulario"
                                 style="width: 400px"
-                                placeholder="{{ user.comorbidade }}">
+                                value="{{ user.comorbidade }}"
+                                name="comorbidade"
+                                disabled>
                             </div>
                         </div>
                         <br>
-                        <button class="botao-perfil" id="salvar" >
-                            SALVAR ALTERAÇÕES
-                        </button>
+                        <div style="display: flex;">
+                            <button type="button" class="botao-perfil" id="editar">
+                                EDITAR
+                            </button>
+                            <button class="botao-perfil" id="salvar" type="submit" >
+                                SALVAR ALTERAÇÕES
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>  
@@ -311,5 +339,14 @@
         location.href = "http://127.0.0.1:8000/add/{{ user.id }}";
     };
 </script>
+<script type="text/javascript">
+     document.getElementById("editar").onclick = function () {
+        var inputs = document.querySelectorAll(".caixa-formulario");
+        inputs.forEach(input => input.disabled = false);
+        document.getElementById("salvar").style.display = "block";
+        this.style.display = "none";
+    };
+</script>
+
 </body>
 </html>

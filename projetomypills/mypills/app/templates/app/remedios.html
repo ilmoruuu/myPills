@@ -115,22 +115,22 @@
     </div>
     <script type="text/javascript">
         document.getElementById("principal").onclick = function () {
-            location.href = "http://127.0.0.1:8000/";
+            location.href = "http://127.0.0.1:8000/{{user.id}}";
         };
         </script>
     <script type="text/javascript">
         document.getElementById("remedios").onclick = function () {
-            location.href = "http://127.0.0.1:8000/remedios/";
+            location.href = "http://127.0.0.1:8000/remedios/{{user.id}}";
         };
         </script>
     <script type="text/javascript">
         document.getElementById("consultas").onclick = function () {
-            location.href = "http://127.0.0.1:8000/consultas/";
+            location.href = "http://127.0.0.1:8000/consultas/{{user.id}}";
         };
         </script>
     <script type="text/javascript">
         document.getElementById("perfil").onclick = function () {
-            location.href = "http://127.0.0.1:8000/perfil/1";
+            location.href = "http://127.0.0.1:8000/perfil/{{user.id}}";
         };
     </script>
     <script>

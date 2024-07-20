@@ -8,15 +8,16 @@ def index(request):
 
 def login(request):
     if request.method == 'POST':
+        print(request.POST)
         email = request.POST["email"]
         senha = request.POST["senha"]
 
         cursor = connect_bd().cursor()
         cursor.execute("SELECT senha FROM paciente WHERE email = %s", (email,))
         resultado = cursor.fetchone()
-        senhabd = resultado[0]
 
         if (resultado):
+            senhabd = resultado[0]
             if (senhabd == senha):
                 cursor.execute("SELECT idPaciente FROM paciente WHERE email = %s", (email,))
                 id_usuario = cursor.fetchone()
@@ -34,6 +35,7 @@ def login(request):
 
 def cadastro(request):
     if request.method == 'POST':
+        print(request.POST)
         nome = request.POST["nome"]
         email = request.POST["email"]
         senha = request.POST["senha"]
@@ -41,28 +43,28 @@ def cadastro(request):
         peso = request.POST["peso"]
         altura = request.POST["altura"]
         comorbidade = request.POST["comorbidade"]
-        cpf = request.POST["CPF"]
+        cpf = request.POST["cpf"]
         genero = request.POST["genero"]
 
-        conn =  connect_bd()
-        cursor = conn.cursor()
+        conexao =  connect_bd()
+        cursor = conexao.cursor()
 
         try:
             cursor.execute(
                 "INSERT INTO paciente (nome, email, senha, idade, peso, altura, comorbidade, cpf, genero) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
                 (nome, email, senha, idade, peso, altura, comorbidade, cpf, genero)
             )
-            conn.commit()
-            return render(request, 'app/login.html')
+            conexao.commit()
         
         except Exception as erroCadastro:
-            conn.rollback()
+            conexao.rollback()
             return render(request, 'app/cadastro.html', {
                 'mensagem': f'Erro ao cadastrar: {erroCadastro}'
             })  
 
         finally:
             cursor.close()
+            return redirect('login')
                  
     else:
         return render(request, 'app/cadastro.html')
@@ -75,6 +77,38 @@ def consultas(request, user):
 
 def perfil(request, user):
     user_info = get_user(user)
+    if request.method == 'POST':
+        nome = request.POST["nome"]
+        email = request.POST["email"]
+        senha = request.POST["senha"]
+        idade = request.POST["idade"]
+        peso = request.POST["peso"]
+        altura = request.POST["altura"]
+        comorbidade = request.POST["comorbidade"]
+        cpf = request.POST["cpf"]
+        genero = request.POST["genero"]
+
+        try:
+            conexao = connect_bd()
+            cursor = conexao.cursor()
+            cursor.execute("""UPDATE paciente SET nome = %s, email = %s, senha = %s, idade = %s, peso = %s, altura = %s, comorbidade = %s, cpf = %s, genero = %s WHERE idPaciente = %s""",
+                (nome, email, senha, idade, peso, altura, comorbidade, cpf, genero, user))
+        
+        except Exception as erroCadastro:
+            conexao.rollback()
+            return render(request, 'app/perfil.html', {
+                'mensagem': f'Erro ao atualizar: {erroCadastro}'
+            })
+        
+        conexao.commit()
+        conexao.close()
+
+        user_info = get_user(user)
+
+        return render(request, 'app/perfil.html', {
+            'user': user_info
+        })
+
     return render(request, 'app/perfil.html',
                   {'user': user_info})
 

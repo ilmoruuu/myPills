@@ -16,65 +16,74 @@
         <div class="container-logo">
             <img src="{% static 'app/imagens/Logo.png'%}" class="logo-login">
         </div>
+    <form method="post">
+        {% csrf_token %}
         <div class="row flex-row justify-content-center">
             <div class="col caixa-login">
                 <label style="font-size: 32px; color: #000000; font-weight: 660;">
                     Cadastre-se
                 </label>
-                <form>
                     <div class="formulario">
                         <input
                         type="text"
                         class="caixa-formulario"
-                        placeholder="  Nome">
+                        placeholder="  Nome"
+                        name="nome">
                         <br>
                         <input
                         type="text"
                         class="caixa-formulario"
-                        placeholder="  Email">
+                        placeholder="  Email"
+                        name="email">
                         <br>
                         <input
                         type="password"
                         class="caixa-formulario"
-                        placeholder="  Senha">
+                        placeholder="  Senha"
+                        name="senha">
                         <br>
                         <input
-                        type="password"
+                        type="number"
                         class="caixa-formulario"
-                        placeholder="  Idade">
+                        placeholder="  Idade"
+                        name="idade">
                         <br>
                         <input
-                        type="password"
+                        type="number"
                         class="caixa-formulario"
-                        placeholder="  CPF">
+                        placeholder="  CPF"
+                        name="cpf">
                         <br>
                 </div>
-                </form>
+                
             </div>
             <div style="border-radius: 0 10px 10px 0;" class="col caixa-login">
-                <form>
                     <div class="formulario">
                         <input
-                        type="password"
+                        type="number"
                         class="caixa-formulario"
-                        placeholder="  Peso">
+                        placeholder="  Peso"
+                        name="peso">
                         <br>
                         <input
-                        type="password"
+                        type="text"
                         class="caixa-formulario"
-                        placeholder="  Altura">
+                        placeholder="  Altura"
+                        name="altura">
                         <br>
                         <input
-                        type="password"
+                        type="text"
                         class="caixa-formulario"
-                        placeholder="  Gênero">
+                        placeholder="  Gênero"
+                        name="genero">
                         <br>
                         <input
-                        type="password"
+                        type="text"
                         class="caixa-formulario"
-                        placeholder="  Comorbidade">
+                        placeholder="  Comorbidade"
+                        name="comorbidade">
                         <br>
-                        <button class="formulario-botoes" style="background:#74b4bb">
+                        <button type="submit" onclick="alert('Conta cadastrada com sucesso!')" id="cadastrar" class="formulario-botoes" style="background:#74b4bb">
                             Cadastre-se
                         </button>
                         <br>
@@ -82,10 +91,11 @@
                             <a href="{% url 'login'%}" style="color: blue;"> Login</a>
                         </div>
                 </div>
-                </form>
             </div>
             
         </div>
     </div>
+</form>
+    
 </body>
 </html>
