@@ -33,6 +33,21 @@
             font-weight: 500;
             margin-right: 10px;
         }
+        .tabela{
+            width: 900px;
+            height: 100px;
+            background-color: white;
+            color: black;
+            
+        }
+
+        .topo-tabela{
+            text-align: center;
+            position: sticky;
+            top: 0;
+
+        }
+
 
     </style>
 </head>
@@ -56,7 +71,24 @@
     </header>
     <br>
     <div>
-        <h1>oi</h1>
+        <table class="tabela">
+            <thead>
+                <tr class="topo-tabela">
+                    <th>Nome do Remédio</th>
+                    <th>Dosagem</th>
+                    <th>Lote</th>
+                    <th>Data de Fabricação</th>
+                    <th>Data de Validade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <!--aqui é onde entra as informações do back-->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <script type="text/javascript">
         document.getElementById("principal").onclick = function () {
