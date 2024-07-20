@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from datetime import date, time
 import psycopg2
@@ -14,11 +14,13 @@ def login(request):
         cursor = connect_bd().cursor()
         cursor.execute("SELECT senha FROM paciente WHERE email = %s", (email,))
         resultado = cursor.fetchone()
-        if (resultado):
-            senhabd = resultado[0]
+        senhabd = resultado[0]
 
+        if (resultado):
             if (senhabd == senha):
-                return render(request, 'app/index.html')
+                cursor.execute("SELECT idPaciente FROM paciente WHERE email = %s", (email,))
+                id_usuario = cursor.fetchone()
+                return redirect('perfil', user=id_usuario[0])
             else:
                 return render(request, 'app/login.html', {
                     'mensagem': 'Senha incorreta'
@@ -65,18 +67,18 @@ def cadastro(request):
     else:
         return render(request, 'app/cadastro.html')
 
-def remedios(request):
+def remedios(request, user):
     return render(request, 'app/remedios.html')
 
-def consultas(request):
+def consultas(request, user):
     return render(request, 'app/consultas.html')
 
 def perfil(request, user):
-    user_num = {user}
+    user_info = get_user(user)
     return render(request, 'app/perfil.html',
-                  {'user': user_num})
+                  {'user': user_info})
 
-def add(request):
+def add(request, user):
     id_usuario = 1
     if request.method == 'POST':
         cursor = connect_bd().cursor()
@@ -110,7 +112,7 @@ def add(request):
             connect_bd().close()
 
             return render(request, 'app/remedios.html', {
-                "user": id_usuario
+                "user": id_usuario,
             })
             
         if 'add_consulta' in request.POST:
@@ -160,3 +162,22 @@ def connect_bd():
     except Exception as erroCadastro:
         print(f"Erro ao conectar ao banco de dados: {erroCadastro}")
         return None
+    
+class user:
+    def __init__(self, id, nome, email, senha, idade, peso, altura, comorbidade, cpf, genero):
+        self.id = id
+        self.nome = nome
+        self.email = email
+        self.senha = senha
+        self.idade = idade
+        self.peso = peso
+        self.altura = altura
+        self.comorbidade = comorbidade
+        self.cpf = cpf
+        self.genero = genero
+
+def get_user(id):
+    cursor = connect_bd().cursor()
+    cursor.execute("SELECT * FROM paciente WHERE idPaciente = %s", (id,))
+    result = cursor.fetchone()
+    return user(result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8], result[9])

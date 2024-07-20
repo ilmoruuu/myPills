@@ -110,25 +110,52 @@
         </div>
         
     </div>
-<script type="text/javascript">
-    document.getElementById("add").onclick = function () {
-        location.href = "http://127.0.0.1:8000/add/";
-    };
+    {% if user.id %}
+    <script type="text/javascript">
+        document.getElementById("add").onclick = function () {
+            location.href = "http://127.0.0.1:8000/add/{{ user.id }}";
+        };
+        </script>
+    <script type="text/javascript">
+        document.getElementById("remedios").onclick = function () {
+            location.href = "http://127.0.0.1:8000/remedios/{{ user.id }}";
+        };
+        </script>
+    <script type="text/javascript">
+        document.getElementById("consultas").onclick = function () {
+            location.href = "http://127.0.0.1:8000/consultas/{{ user.id }}";
+        };
+        </script>
+    <script type="text/javascript">
+        document.getElementById("perfil").onclick = function () {
+            location.href = "http://127.0.0.1:8000/perfil/{{ user.id }}";
+        };
     </script>
-<script type="text/javascript">
-    document.getElementById("remedios").onclick = function () {
-        location.href = "http://127.0.0.1:8000/remedios/";
-    };
+    {% else %}
+    <script type="text/javascript">
+        document.getElementById("add").onclick = function () {
+            location.href = "http://127.0.0.1:8000/login/";
+            alert("Você precisa entrar na sua conta para ter acesso as funcionalidades!")
+        };
+        </script>
+    <script type="text/javascript">
+        document.getElementById("remedios").onclick = function () {
+            location.href = "http://127.0.0.1:8000/login/";
+            alert("Você precisa entrar na sua conta para ter acesso as funcionalidades!")
+        };
+        </script>
+    <script type="text/javascript">
+        document.getElementById("consultas").onclick = function () {
+            location.href = "http://127.0.0.1:8000/login/";
+            alert("Você precisa entrar na sua conta para ter acesso as funcionalidades!")
+        };
+        </script>
+    <script type="text/javascript">
+        document.getElementById("perfil").onclick = function () {
+            location.href = "http://127.0.0.1:8000/login/";
+            alert("Você precisa entrar na sua conta para ter acesso as funcionalidades!")
+        };
     </script>
-<script type="text/javascript">
-    document.getElementById("consultas").onclick = function () {
-        location.href = "http://127.0.0.1:8000/consultas/";
-    };
-    </script>
-<script type="text/javascript">
-    document.getElementById("perfil").onclick = function () {
-        location.href = "http://127.0.0.1:8000/perfil/1";
-    };
-</script>
+    {% endif %}
 </body>
 </html>

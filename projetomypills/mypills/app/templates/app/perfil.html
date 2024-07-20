@@ -126,7 +126,6 @@
                 ADICIONAR
             </button>
         </header>
-
         <div class="blocao">
             <div class="first-column justify-content-between align-items-center">
                 <div class="perfil-card">
@@ -149,8 +148,12 @@
                         <input
                         type="text"
                         class="caixa-formulario"
+<<<<<<< Updated upstream
                         style="width: 550px"
                         placeholder="{{ user.nome }}">
+=======
+                        placeholder="  {{user.nome}}">
+>>>>>>> Stashed changes
                         <br>
                         <br>
                         <div class="datas">
@@ -290,22 +293,22 @@
 </script>
 <script type="text/javascript">
     document.getElementById("principal").onclick = function () {
-        location.href = "http://127.0.0.1:8000/";
+        location.href = "http://127.0.0.1:8000/{{ user.id }}";
     };
     </script>
 <script type="text/javascript">
     document.getElementById("remedios").onclick = function () {
-        location.href = "http://127.0.0.1:8000/remedios/";
+        location.href = "http://127.0.0.1:8000/remedios/{{ user.id }}";
     };
     </script>
 <script type="text/javascript">
     document.getElementById("consultas").onclick = function () {
-        location.href = "http://127.0.0.1:8000/consultas/";
+        location.href = "http://127.0.0.1:8000/consultas/{{ user.id }}";
     };
     </script>
 <script type="text/javascript">
     document.getElementById("add").onclick = function () {
-        location.href = "http://127.0.0.1:8000/add/";
+        location.href = "http://127.0.0.1:8000/add/{{ user.id }}";
     };
 </script>
 </body>
