@@ -83,8 +83,8 @@
         <button class="topo-botoes" id="remedios">
             MEUS REMÉDIOS
         </button>
-        <button class="topo-botoes" id="consultas">
-            MINHAS CONSULTAS
+        <button class="topo-botoes" id="add">
+            ADICIONAR
         </button>
         <button class="topo-botoes" id="perfil">
             MEU PERFIL
@@ -123,14 +123,15 @@
         };
         </script>
     <script type="text/javascript">
-        document.getElementById("consultas").onclick = function () {
-            location.href = "http://127.0.0.1:8000/consultas/";
+        document.getElementById("add").onclick = function () {
+            location.href = "http://127.0.0.1:8000/add/1";
         };
         </script>
     <script type="text/javascript">
         document.getElementById("perfil").onclick = function () {
             location.href = "http://127.0.0.1:8000/perfil/1";
         };
+        
     </script>
     <script>
           async function fetchData() {

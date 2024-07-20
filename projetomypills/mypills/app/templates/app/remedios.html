@@ -80,8 +80,8 @@
         <button class="topo-botoes" id="principal">
             MENU PRINCIPAL
         </button>
-        <button class="topo-botoes" id="remedios">
-            MEUS REMÉDIOS
+        <button class="topo-botoes" id="add">
+            ADICIONAR
         </button>
         <button class="topo-botoes" id="consultas">
             MINHAS CONSULTAS
@@ -119,9 +119,10 @@
         };
         </script>
     <script type="text/javascript">
-        document.getElementById("remedios").onclick = function () {
-            location.href = "http://127.0.0.1:8000/remedios/{{user.id}}";
+        document.getElementById("add").onclick = function () {
+            location.href = "http://127.0.0.1:8000/add/1{{user.id}}";
         };
+        //o botão de add só funciona sem esse {{user.id}}, mas deixei assim por enquanto
         </script>
     <script type="text/javascript">
         document.getElementById("consultas").onclick = function () {
