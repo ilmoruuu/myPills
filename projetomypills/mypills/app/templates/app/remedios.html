@@ -69,6 +69,18 @@
             z-index: 100; 
         }
 
+        .botao-perfil {
+            display: block;
+            width: 250px;
+            background-color: white;
+            color: black;
+            padding: 12px;
+            margin: 10px auto;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 650;
+        }
+
     </style>
     
 </head>
@@ -92,15 +104,15 @@
     </header>
     <br>
     <div class="container">
-        <h3 class="tit">Remédios Adicionados:</h3>
+        <h3 class="tit">REMÉDIOS ADICIONADOS:</h3>
         <table class="tabela">
             <thead>
                 <tr class="topo-tabela">
-                    <th>Nome do Remédio</th>
-                    <th>Dosagem</th>
-                    <th>Lote</th>
-                    <th>Data de Fabricação</th>
-                    <th>Data de Validade</th>
+                    <th>REMÉDIO</th>
+                    <th>DOSAGEM</th>
+                    <th>LOTE</th>
+                    <th>DATA DE FABRICAÇÃO</th>
+                    <th>DATA DE VALIDADE</th>
                 </tr>
             </thead>
             <tbody class="corpo-tabela">
@@ -112,6 +124,9 @@
                 </tr>
             </tbody>
         </table>
+        <button type="button" class="botao-perfil" id="adicionar">
+            ADICIONAR REMÉDIO
+        </button>
     </div>
     <script type="text/javascript">
         document.getElementById("principal").onclick = function () {
@@ -132,6 +147,11 @@
     <script type="text/javascript">
         document.getElementById("perfil").onclick = function () {
             location.href = "http://127.0.0.1:8000/perfil/{{user.id}}";
+        };
+    </script>
+    <script type="text/javascript">
+        document.getElementById("adicionar").onclick = function () {
+            location.href = "http://127.0.0.1:8000/add/{{user.id}}";
         };
     </script>
     <script>

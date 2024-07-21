@@ -69,6 +69,18 @@
             z-index: 100; 
         }
 
+        .botao-perfil {
+            display: block;
+            width: 250px;
+            background-color: white;
+            color: black;
+            padding: 12px;
+            margin: 10px auto;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 650;
+        }
+
     </style>
     
 </head>
@@ -92,14 +104,14 @@
     </header>
     <br>
     <div class="container">
-        <h3 class="tit">Consultas Adicionados:</h3>
+        <h3 class="tit">CONSULTAS ADICIONADAS:</h3>
         <table class="tabela">
             <thead>
                 <tr class="topo-tabela">
-                    <th>Médico</th>
-                    <th>Local</th>
-                    <th>Data</th>
-                    <th>Hora</th>
+                    <th>MÉDICO</th>
+                    <th>LOCAL</th>
+                    <th>DATA</th>
+                    <th>HORA</th>
                 </tr>
             </thead>
             <tbody class="corpo-tabela">
@@ -111,6 +123,9 @@
                 </tr>
             </tbody>
         </table>
+        <button type="button" class="botao-perfil" id="adicionar">
+            ADICIONAR CONSULTA
+        </button>
     </div>
     <script type="text/javascript">
         document.getElementById("principal").onclick = function () {
@@ -132,6 +147,11 @@
             location.href = "http://127.0.0.1:8000/perfil/1";
         };
         
+    </script>
+    <script type="text/javascript">
+        document.getElementById("adicionar").onclick = function () {
+            location.href = "http://127.0.0.1:8000/add/{{user.id}}";
+        };
     </script>
     <script>
           async function fetchData() {
