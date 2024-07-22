@@ -262,7 +262,6 @@ def get_remedios(id):
         remedios.append(remedio_instance)
     return remedios
 
-
 def get_consultas(id):
     cursor = connect_bd().cursor()
     cursor.execute("SELECT * FROM consulta WHERE idPaciente = %s", (id,))
@@ -272,4 +271,15 @@ def get_consultas(id):
         consulta_instance = Consulta(consulta[0], consulta[1], consulta[2], consulta[3], consulta[4], consulta[5], consulta[6])
         consultas.append(consulta_instance)
     return consultas
-    
+
+def delete_remedios(id):
+    cursor = connect_bd().cursor()
+    cursor.execute("DELETE FROM remedio WHERE idPaciente = %s AND idRemedio = %s", (id, ))
+    connect_bd().commit()
+    return redirect('remedios')
+
+def delete_consultas(id):
+    cursor = connect_bd().cursor()
+    cursor.execute("DELETE FROM consulta WHERE idPaciente = %s AND idConsulta = %s ", (id, ))
+    connect_bd().commit()
+    return redirect('consultas')
