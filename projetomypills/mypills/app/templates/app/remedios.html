@@ -116,12 +116,15 @@
                 </tr>
             </thead>
             <tbody class="corpo-tabela">
+                {% for remedio in remedios %}
                 <tr>
-                    <td>
-                        <!--aqui vai aumentar o tamanho de acordo com a quantidade de dados-->
-                        oi
-                    </td>
+                <td>{{remedio.nome_comercial}}</td>
+                <td>{{remedio.dosagem}}</td>
+                <td>{{remedio.lote}}</td>
+                <td>{{remedio.data_fabricacao}}</td>
+                <td>{{remedio.data_vencimento}}</td>
                 </tr>
+                {% endfor block %}
             </tbody>
         </table>
         <button type="button" class="botao-perfil" id="adicionar">
@@ -130,69 +133,29 @@
     </div>
     <script type="text/javascript">
         document.getElementById("principal").onclick = function () {
-            location.href = "http://127.0.0.1:8000/{{user.id}}";
+            location.href = "http://127.0.0.1:8000/";
         };
         </script>
     <script type="text/javascript">
         document.getElementById("add").onclick = function () {
-            location.href = "http://127.0.0.1:8000/add/1{{user.id}}";
+            location.href = "http://127.0.0.1:8000/add/";
         };
-        //o botão de add só funciona sem esse {{user.id}}, mas deixei assim por enquanto
+       
         </script>
     <script type="text/javascript">
         document.getElementById("consultas").onclick = function () {
-            location.href = "http://127.0.0.1:8000/consultas/{{user.id}}";
+            location.href = "http://127.0.0.1:8000/consultas/";
         };
         </script>
     <script type="text/javascript">
         document.getElementById("perfil").onclick = function () {
-            location.href = "http://127.0.0.1:8000/perfil/{{user.id}}";
+            location.href = "http://127.0.0.1:8000/perfil/";
         };
     </script>
     <script type="text/javascript">
         document.getElementById("adicionar").onclick = function () {
-            location.href = "http://127.0.0.1:8000/add/{{user.id}}";
+            location.href = "http://127.0.0.1:8000/add/";
         };
-    </script>
-    <script>
-          async function fetchData() {
-            try {
-            const response = await fetch('mudar para URl de acesso do back');
-            
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-
-            const data = await response.json();
-            
-            populateTable(data);
-            } catch (error) {
-            console.error('Erro ao buscar dados:', error);
-            }
-        }
-
-        function populateTable(data) {
-            const tableBody = document.querySelector('.corpo-tabela');
-
-            tableBody.innerHTML = '';
-
-
-            data.forEach(item => {
-            const row = document.createElement('tr');
-
-            row.innerHTML = `
-                <td>${item.nome_comercial}</td>
-                <td>${item.dosagem}</td>
-                <td>${item.lote}</td>
-                <td>${item.data_fabricacao}</td>
-                <td>${item.data_vencimento}</td>
-            `;
-
-            tableBody.appendChild(row);
-            });
-        }
-
-        fetchData();
     </script>
 </body>
 </html>

@@ -110,25 +110,25 @@
         </div>
         
     </div>
-    {% if user.id %}
+    {% if user %}
     <script type="text/javascript">
         document.getElementById("add").onclick = function () {
-            location.href = "http://127.0.0.1:8000/add/{{ user.id }}";
+            location.href = "http://127.0.0.1:8000/add/";
         };
         </script>
     <script type="text/javascript">
         document.getElementById("remedios").onclick = function () {
-            location.href = "http://127.0.0.1:8000/remedios/{{ user.id }}";
+            location.href = "http://127.0.0.1:8000/remedios/";
         };
         </script>
     <script type="text/javascript">
         document.getElementById("consultas").onclick = function () {
-            location.href = "http://127.0.0.1:8000/consultas/{{ user.id }}";
+            location.href = "http://127.0.0.1:8000/consultas/";
         };
         </script>
     <script type="text/javascript">
         document.getElementById("perfil").onclick = function () {
-            location.href = "http://127.0.0.1:8000/perfil/{{ user.id }}";
+            location.href = "http://127.0.0.1:8000/perfil/";
         };
     </script>
     {% else %}

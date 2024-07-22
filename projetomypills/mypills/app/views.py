@@ -5,7 +5,10 @@ import psycopg2
 
 
 def index(request):
-    return render(request, 'app/index.html')
+    user = request.session.get('user_id')
+    return render(request, 'app/index.html', {
+        'user': user
+    })
 
 def login(request):
     if request.method == 'POST':
@@ -22,7 +25,8 @@ def login(request):
             if (senhabd == senha):
                 cursor.execute("SELECT idPaciente FROM paciente WHERE email = %s", (email,))
                 id_usuario = cursor.fetchone()
-                return redirect('perfil', user=id_usuario[0])
+                request.session['user_id'] = id_usuario
+                return redirect('perfil')
             else:
                 return render(request, 'app/login.html', {
                     'mensagem': 'Senha incorreta'
@@ -70,14 +74,18 @@ def cadastro(request):
     else:
         return render(request, 'app/cadastro.html')
 
-def remedios(request, user):
-    user = get_user(user)
+def remedios(request):
+    user_id = request.session.get('user_id')[0]
+    user = get_user(user_id)
+    remedios = get_remedios(user.id)
     return render(request, 'app/remedios.html', {
-        'user': user
+        'user': user,
+        'remedios': remedios
     })
 
-def consultas(request, user):
-    user = get_user(user)
+def consultas(request):
+    user_id = request.session.get('user_id')[0]
+    user = get_user(user_id)
     consultas = get_consultas(user.id)
     print(consultas)
     return render(request, 'app/consultas.html', {
@@ -85,8 +93,9 @@ def consultas(request, user):
         'consultas': consultas
     })
 
-def perfil(request, user):
-    user_info = get_user(user)
+def perfil(request):
+    user_id = request.session.get('user_id')[0]
+    user_info = get_user(user_id)
     if request.method == 'POST':
         nome = request.POST["nome"]
         email = request.POST["email"]
@@ -113,7 +122,7 @@ def perfil(request, user):
         conexao.commit()
         conexao.close()
 
-        user_info = get_user(user)
+        user_info = get_user(user_id)
 
         return render(request, 'app/perfil.html', {
             'user': user_info
@@ -122,38 +131,37 @@ def perfil(request, user):
     return render(request, 'app/perfil.html',
                   {'user': user_info})
 
-def add(request, user):
-    user = get_user(user)
+def add(request):
+    user_id = request.session.get('user_id')[0]
+    user = get_user(user_id)
     if request.method == 'POST':
-        cursor = connect_bd().cursor()
+        conexao = connect_bd()
+        cursor = conexao.cursor()
         if 'add_remedio' in request.POST:
             remedio = request.POST['remedio']
             dosagem = request.POST['dosagem']
             lote = request.POST['lote']
             fabricacao = request.POST['fabricacao']
             validade = request.POST['validade']
+            fabricacao = datetime.strptime(fabricacao, '%Y-%m-%d').date()
+            validade = datetime.strptime(validade, '%Y-%m-%d').date()
             
-            cursor.execute("""
-            INSERT INTO remedio (nome_comercial, data_vencimento, data_fabricacao, dosagem, lote)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-                RETURNING idRemedio""",
-                (remedio, validade, fabricacao, dosagem, lote))
-
-            id_remedio = cursor.fetchone
-            cursor.execute("""
-                INSERT INTO historico (idPaciente)
-                VALUES (%s)
-                RETURNING idHistorico
-            """, (user.id,))
-            
-            id_historico = cursor.fetchone()[0]
-            cursor.execute("""
-                INSERT INTO registro_remedio (idPaciente, idRemedio, idHistorico, data, horario, quantidade)
-                VALUES (%s, %s, %s, %s, %s, %s)
-            """, (user.id, id_remedio, id_historico, date.today(), time(12, 0), 1.0))
-
-            connect_bd().commit()
-            connect_bd().close()
+            try:
+                cursor.execute("""
+                INSERT INTO remedio (nome_comercial, data_vencimento, data_fabricacao, dosagem, lote, idPaciente)
+                    VALUES (%s, %s, %s, %s, %s, %s)
+                    RETURNING idRemedio""",
+                    (remedio, validade, fabricacao, dosagem, lote, user.id))
+                id_remedio = cursor.fetchone()[0]
+            except Exception as erroCadastro:
+                conexao.rollback()
+                return render(request, 'app/add.html', {
+                    'mensagem': f'Erro ao cadastrar: {erroCadastro}'
+                })
+            finally:
+                print("{id_remedio} cadastrado!")
+                conexao.commit()
+                conexao.close()
 
             return render(request, 'app/remedios.html', {
                 "user": user,
@@ -181,8 +189,8 @@ def add(request, user):
                 VALUES (%s, %s, %s, %s, %s, %s)
             """, (user.id, id_historico, medico, local, data, horario))
 
-            connect_bd().commit()
-            connect_bd().close()
+            conexao.commit()
+            conexao.close()
 
             return render(request, 'app/consultas.html', {
                 "user": user,
@@ -207,7 +215,7 @@ def connect_bd():
         print(f"Erro ao conectar ao banco de dados: {erroCadastro}")
         return None
     
-class user:
+class User:
     def __init__(self, id, nome, email, senha, idade, peso, altura, comorbidade, cpf, genero):
         self.id = id
         self.nome = nome
@@ -220,7 +228,7 @@ class user:
         self.cpf = cpf
         self.genero = genero
 
-class remedio:
+class Remedio:
     def __init__(self, id, nome_comercial, data_vencimento, data_fabricacao, dosagem, lote):
         self.id = id
         self.nome_comercial = nome_comercial
@@ -229,9 +237,11 @@ class remedio:
         self.dosagem = dosagem
         self.lote = lote
 
-class consulta:
-    def __init__(self, id, medico, local, data, horario):
+class Consulta:
+    def __init__(self, id, idPaciente, idHistorico, horario, local, medico, data):
         self.id = id
+        self.idPaciente = idPaciente
+        self.idHistorico = idHistorico
         self.medico = medico
         self.local = local
         self.data = data
@@ -241,7 +251,7 @@ def get_user(id):
     cursor = connect_bd().cursor()
     cursor.execute("SELECT * FROM paciente WHERE idPaciente = %s", (id,))
     result = cursor.fetchone()
-    return user(result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8], result[9])
+    return User(result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8], result[9])
 
 def get_remedios(id):
     cursor = connect_bd().cursor()
@@ -249,7 +259,10 @@ def get_remedios(id):
     result = cursor.fetchall()
     remedios = []
     for remedio in result:
-        remedios.append(remedio(remedio[0], remedio[1], remedio[2], remedio[3], remedio[4], remedio[5]))
+        remedio_instance = Remedio(remedio[0], remedio[1], remedio[2], remedio[3], remedio[4], remedio[5])
+        remedios.append(remedio_instance)
+    return remedios
+
 
 def get_consultas(id):
     cursor = connect_bd().cursor()
@@ -257,8 +270,7 @@ def get_consultas(id):
     result = cursor.fetchall()
     consultas = []
     for consulta in result:
-        consultas.append(consulta(consulta[0], consulta[1], consulta[2], consulta[3], consulta[4]))
+        consulta_instance = Consulta(consulta[0], consulta[1], consulta[2], consulta[3], consulta[4], consulta[5], consulta[6])
+        consultas.append(consulta_instance)
     return consultas
     
-
-print(get_consultas(1))

@@ -117,7 +117,7 @@
             <tbody class="corpo-tabela">
                 {% for consulta in consultas %}
                 <tr>
-                    <td>{{consulta.medico}}</td>
+                <td>{{consulta.medico}}</td>
                 <td>{{consulta.local}}</td>
                 <td>{{consulta.data}}</td>
                 <td>{{consulta.horario}}</td>
@@ -136,23 +136,23 @@
         </script>
     <script type="text/javascript">
         document.getElementById("remedios").onclick = function () {
-            location.href = "http://127.0.0.1:8000/remedios/{{user.id}}";
+            location.href = "http://127.0.0.1:8000/remedios/";
         };
         </script>
     <script type="text/javascript">
         document.getElementById("add").onclick = function () {
-            location.href = "http://127.0.0.1:8000/add/{{user.id}}";
+            location.href = "http://127.0.0.1:8000/add/";
         };
         </script>
     <script type="text/javascript">
         document.getElementById("perfil").onclick = function () {
-            location.href = "http://127.0.0.1:8000/perfil/{{user.id}}";
+            location.href = "http://127.0.0.1:8000/perfil/";
         };
         
     </script>
     <script type="text/javascript">
         document.getElementById("adicionar").onclick = function () {
-            location.href = "http://127.0.0.1:8000/add/{{user.id}}";
+            location.href = "http://127.0.0.1:8000/add/";
         };
     </script>
     <script>

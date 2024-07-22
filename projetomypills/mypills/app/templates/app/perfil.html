@@ -319,24 +319,25 @@
         image.src = URL.createObjectURL(event.target.files[0]);
     };
 </script>
+
 <script type="text/javascript">
     document.getElementById("principal").onclick = function () {
-        location.href = "http://127.0.0.1:8000/{{ user.id }}";
+        location.href = "http://127.0.0.1:8000/";
     };
     </script>
 <script type="text/javascript">
     document.getElementById("remedios").onclick = function () {
-        location.href = "http://127.0.0.1:8000/remedios/{{ user.id }}";
+        location.href = "http://127.0.0.1:8000/remedios/";
     };
     </script>
 <script type="text/javascript">
     document.getElementById("consultas").onclick = function () {
-        location.href = "http://127.0.0.1:8000/consultas/{{ user.id }}";
+        location.href = "http://127.0.0.1:8000/consultas/";
     };
     </script>
 <script type="text/javascript">
     document.getElementById("add").onclick = function () {
-        location.href = "http://127.0.0.1:8000/add/{{ user.id }}";
+        location.href = "http://127.0.0.1:8000/add/";
     };
 </script>
 <script type="text/javascript">
