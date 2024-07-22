@@ -166,9 +166,7 @@ def add(request):
                 conexao.commit()
                 conexao.close()
 
-            return render(request, 'app/remedios.html', {
-                "user": user,
-            })
+            return redirect('remedios')
             
         if 'add_consulta' in request.POST:
             print(request.POST)
@@ -195,9 +193,7 @@ def add(request):
             conexao.commit()
             conexao.close()
 
-            return render(request, 'app/consultas.html', {
-                "user": user,
-            })
+            return redirect('consultas')
         
     else:       
         return render(request, 'app/add.html', {
