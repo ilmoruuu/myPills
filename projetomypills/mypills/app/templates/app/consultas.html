@@ -115,12 +115,14 @@
                 </tr>
             </thead>
             <tbody class="corpo-tabela">
+                {% for consulta in consultas %}
                 <tr>
-                    <td>
-                        <!--aqui vai aumentar o tamanho de acordo com a quantidade de dados-->
-                        oi
-                    </td>
+                    <td>{{consulta.medico}}</td>
+                <td>{{consulta.local}}</td>
+                <td>{{consulta.data}}</td>
+                <td>{{consulta.horario}}</td>
                 </tr>
+                {% endfor block %}
             </tbody>
         </table>
         <button type="button" class="botao-perfil" id="adicionar">
@@ -134,17 +136,17 @@
         </script>
     <script type="text/javascript">
         document.getElementById("remedios").onclick = function () {
-            location.href = "http://127.0.0.1:8000/remedios/";
+            location.href = "http://127.0.0.1:8000/remedios/{{user.id}}";
         };
         </script>
     <script type="text/javascript">
         document.getElementById("add").onclick = function () {
-            location.href = "http://127.0.0.1:8000/add/1";
+            location.href = "http://127.0.0.1:8000/add/{{user.id}}";
         };
         </script>
     <script type="text/javascript">
         document.getElementById("perfil").onclick = function () {
-            location.href = "http://127.0.0.1:8000/perfil/1";
+            location.href = "http://127.0.0.1:8000/perfil/{{user.id}}";
         };
         
     </script>
@@ -194,6 +196,6 @@
         }
 
         fetchData();
-    </script>
+    </script>  
 </body>
 </html>

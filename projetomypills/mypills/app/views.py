@@ -1,7 +1,8 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
-from datetime import date, time
+from datetime import date, time, datetime
 import psycopg2
+
 
 def index(request):
     return render(request, 'app/index.html')
@@ -70,10 +71,19 @@ def cadastro(request):
         return render(request, 'app/cadastro.html')
 
 def remedios(request, user):
-    return render(request, 'app/remedios.html')
+    user = get_user(user)
+    return render(request, 'app/remedios.html', {
+        'user': user
+    })
 
 def consultas(request, user):
-    return render(request, 'app/consultas.html')
+    user = get_user(user)
+    consultas = get_consultas(user.id)
+    print(consultas)
+    return render(request, 'app/consultas.html', {
+        'user': user,
+        'consultas': consultas
+    })
 
 def perfil(request, user):
     user_info = get_user(user)
@@ -113,7 +123,7 @@ def perfil(request, user):
                   {'user': user_info})
 
 def add(request, user):
-    id_usuario = 1
+    user = get_user(user)
     if request.method == 'POST':
         cursor = connect_bd().cursor()
         if 'add_remedio' in request.POST:
@@ -134,61 +144,61 @@ def add(request, user):
                 INSERT INTO historico (idPaciente)
                 VALUES (%s)
                 RETURNING idHistorico
-            """, (id_usuario,))
+            """, (user.id,))
             
             id_historico = cursor.fetchone()[0]
             cursor.execute("""
                 INSERT INTO registro_remedio (idPaciente, idRemedio, idHistorico, data, horario, quantidade)
                 VALUES (%s, %s, %s, %s, %s, %s)
-            """, (id_usuario, id_remedio, id_historico, date.today(), time(12, 0), 1.0))
+            """, (user.id, id_remedio, id_historico, date.today(), time(12, 0), 1.0))
 
             connect_bd().commit()
             connect_bd().close()
 
             return render(request, 'app/remedios.html', {
-                "user": id_usuario,
+                "user": user,
             })
             
         if 'add_consulta' in request.POST:
+            print(request.POST)
             medico = request.POST['medico']
             local = request.POST['local']
-            dataHora = request.POST['dataHora']
+            datahr = request.POST['datahr']
+            data, horario = datahr.split("T")
+
+            data = datetime.strptime(data, '%Y-%m-%d').date()
 
             cursor.execute("""
-            INSERT INTO consulta (nome_comercial, data_vencimento, data_fabricacao, dosagem, lote)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-                RETURNING idRemedio""",
-                (remedio, validade, fabricacao, dosagem, lote))
-
-            id_remedio = cursor.fetchone
-            cursor.execute("""
-                INSERT INTO historico (idPaciente)
-                VALUES (%s)
-                RETURNING idHistorico
-            """, (id_usuario,))
-            
+                           INSERT INTO historico (idPaciente)
+                            VALUES (%s)
+                            RETURNING idHistorico
+                        """, (user.id,))
             id_historico = cursor.fetchone()[0]
+
+
             cursor.execute("""
-                INSERT INTO registro_remedio (idPaciente, idRemedio, idHistorico, data, horario, quantidade)
+                INSERT INTO consulta (idPaciente, idHistorico, medico, local, data, horario)
                 VALUES (%s, %s, %s, %s, %s, %s)
-            """, (id_usuario, id_remedio, id_historico, date.today(), time(12, 0), 1.0))
+            """, (user.id, id_historico, medico, local, data, horario))
 
             connect_bd().commit()
             connect_bd().close()
 
-            return render(request, 'app/remedios.html', {
-                "user": id_usuario
+            return render(request, 'app/consultas.html', {
+                "user": user,
             })
         
     else:       
-        return render(request, 'app/add.html')
+        return render(request, 'app/add.html', {
+            "user": user
+        })
 
 def connect_bd():
     try:
         conn = psycopg2.connect(
             dbname="MyPills",
             user="postgres",
-            password="ilmoru0407",
+            password="marialaiz1",
             host="localhost",
             port="5432"
         )
@@ -210,8 +220,45 @@ class user:
         self.cpf = cpf
         self.genero = genero
 
+class remedio:
+    def __init__(self, id, nome_comercial, data_vencimento, data_fabricacao, dosagem, lote):
+        self.id = id
+        self.nome_comercial = nome_comercial
+        self.data_vencimento = data_vencimento
+        self.data_fabricacao = data_fabricacao
+        self.dosagem = dosagem
+        self.lote = lote
+
+class consulta:
+    def __init__(self, id, medico, local, data, horario):
+        self.id = id
+        self.medico = medico
+        self.local = local
+        self.data = data
+        self.horario = horario
+
 def get_user(id):
     cursor = connect_bd().cursor()
     cursor.execute("SELECT * FROM paciente WHERE idPaciente = %s", (id,))
     result = cursor.fetchone()
     return user(result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8], result[9])
+
+def get_remedios(id):
+    cursor = connect_bd().cursor()
+    cursor.execute("SELECT * FROM remedio WHERE idPaciente = %s", (id,))
+    result = cursor.fetchall()
+    remedios = []
+    for remedio in result:
+        remedios.append(remedio(remedio[0], remedio[1], remedio[2], remedio[3], remedio[4], remedio[5]))
+
+def get_consultas(id):
+    cursor = connect_bd().cursor()
+    cursor.execute("SELECT * FROM consulta WHERE idPaciente = %s", (id,))
+    result = cursor.fetchall()
+    consultas = []
+    for consulta in result:
+        consultas.append(consulta(consulta[0], consulta[1], consulta[2], consulta[3], consulta[4]))
+    return consultas
+    
+
+print(get_consultas(1))
