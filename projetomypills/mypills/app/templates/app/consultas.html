@@ -47,6 +47,9 @@
             padding: 20px;
         }
         .tabela-container {
+            display: flex;
+            flex-direction: column;
+            align-items: first baseline;
             max-height: 500px;
             overflow-y: auto; 
         }
@@ -112,7 +115,9 @@
                     <th>LOCAL</th>
                     <th>DATA</th>
                     <th>HORA</th>
-                    <th></th>
+                    <th>
+                        <img src="{% static 'app/imagens/whatsapp.png'%}">
+                    </th>
                 </tr>
             </thead>
             <tbody class="corpo-tabela">
@@ -122,6 +127,12 @@
                 <td>{{consulta.local}}</td>
                 <td>{{consulta.data}}</td>
                 <td>{{consulta.horario}}</td>
+                <td>
+                    <form method="post" id="checkboxes">
+                        {% csrf_token %}
+                        <input type="checkbox" name="whatsapp" value="{{ consulta.id }}">
+                    </form>
+                </td>
                 <td>
                     <form method="post" style="display: inline;">
                         {% csrf_token %}
@@ -174,5 +185,32 @@
         }
         });
     </script> 
+    <script>
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const form = this.closest('form');
+                const csrfToken = form.querySelector('input[name="csrfmiddlewaretoken"]').value;
+                const checkedCheckboxes = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
+
+                fetch("{% url 'consultas' %}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken
+                    },
+                    body: JSON.stringify({options: checkedCheckboxes})
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.message);
+                    alert(data.message);
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                });
+            });
+        });
+    </script>
+    
 </body>
 </html>

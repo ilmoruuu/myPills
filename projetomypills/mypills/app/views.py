@@ -94,6 +94,10 @@ def consultas(request):
     user_id = request.session.get('user_id')[0]
     user = get_user(user_id)
     consultas = get_consultas(user.id)
+
+    if request.method == 'POST' and 'whatsapp' in request.POST and request.POST['value'] != "":
+        print(request.POST['value'])
+
     if request.method == 'POST' and 'deletar' in request.POST:
         id_consulta = int(request.POST['id_consulta'])
 
