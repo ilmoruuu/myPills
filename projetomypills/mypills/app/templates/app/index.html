@@ -9,10 +9,11 @@
     <link rel="stylesheet" href="{% static 'app/styles.css' %}">
     <script src="{% static 'app/scripts/script.js' %}"></script>
     <link rel="shortcut icon" href="{% static 'app/imagens/Logo.png'%}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Paytone+One" />
     <style>
         body {
             background-color: #74b4bb;
-            color: #4C9E7C;
+            color: #4a969e;
         }
         .topo {
             display: flex;
@@ -37,15 +38,16 @@
             align-items: center;
             margin-top: 15px;
         }
-        .topo-botoes {
-            width: 175px;
-            height: 40px;
-            border-radius: 8px;
-            border: 2px solid black;
-            color: black;
+        .pag-botoes {
+            display: block;
+            width: 250px;
             background-color: #acd4d8;
-            font-weight: 500;
-            margin-right: 10px;
+            color: black;
+            padding: 12px;
+            margin: 30px 60px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 620;
         }
         .menu {
             display: flex;
@@ -58,9 +60,73 @@
             width: 1000px;
             height: 500px;
         }
+
+        .first-column {
+            width: 50%;
+            height: 500px;
+            padding: 0 40px;
+            float: left;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .second-column {
+            width: 50%;
+            height: 500px;
+            padding: 40px 40px;
+            float: right;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .cloud {
+            width: 350px; height: 120px;
+            
+            background: #f2f9fe;
+            background: linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
+            background: -webkit-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
+            background: -moz-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
+            background: -ms-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
+            background: -o-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
+            
+            border-radius: 100px;
+            -webkit-border-radius: 100px;
+            -moz-border-radius: 100px;
+            
+            position: relative;
+            margin: 120px auto 20px;
+        }
+
+        .cloud:after, .cloud:before {
+            content: '';
+            position: absolute;
+            background: #f2f9fe;
+            z-index: -1
+        }
+
+        .cloud:after {
+            width: 100px; height: 100px;
+            top: -50px; left: 50px;
+            
+            border-radius: 100px;
+            -webkit-border-radius: 100px;
+            -moz-border-radius: 100px;
+        }
+
+        .cloud:before {
+            width: 180px; height: 180px;
+            top: -90px; right: 50px;
+            border-radius: 200px;
+            -webkit-border-radius: 200px;
+            -moz-border-radius: 200px;
+        }
+
         p{
-            color: black;
-            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            color: rgb(0, 60, 70);
+            font-weight: 570;
+            font-size: 90%;
+            text-align: center;
+            font-family: 'gill sans', Cochin, Georgia, Times, 'Times New Roman', serif;
         }
 
     </style>
@@ -71,41 +137,37 @@
     <div class="header">
 
         <header class="topo">
-            <img src="{% static 'app/imagens/Logo.png' %}" class="logo-login"  style="margin-right: 200px;">
-            <button class="topo-botoes" id="add">
-                ADICIONAR
-            </button>
-            <button class="topo-botoes" id="remedios">
-                MEUS REMÉDIOS
-            </button>
-            <button class="topo-botoes" id="consultas">
-                MINHAS CONSULTAS
-            </button>
-            <button class="topo-botoes" id="perfil">
-                MEU PERFIL
-            </button>
+            <img src="{% static 'app/imagens/Logo.png' %}" class="logo-login"  style="justify-content: center;">
         </header>
 
         <div class="main">
-            <div class="menu">
-                <label style="font-size: 32px; color: rgba(0, 0, 0, 0.948); font-weight: 600; display: flex; justify-content: center;">
-                    Bem-vindo(a) ao MyPills!
-                </label>
+            <div class="first-column">
+                <div class="cloud">
+                    <j style="font-family: 'Paytone One'; font-size: 180%">
+                        Bem-vindo<br> ao My Pills!
+                    </j>
+                </div>
+                <p style="width: 400px;">
+                    O MyPills foi desenvolvido para fins avaliativos na disciplina de Banco de Dados no Curso de Bacharelado de 
+                    Engenharia de Software, ministrada pelo Professor Me.Victor Ferreira. Pensando em desenvolver algo que tivesse
+                    um impacto positivo no ambiente da saúde e bem-estar, a equipe composta por Ana Júlia, Eloise Sophia, Murilo Lucena, Paula Beatriz 
+                    e Rony Rangel propõe a aplicação do My Pills.
+                </p>
                 <br>
-                <p>
-                    O MyPills foi desenvolvido para fins avaliativos na disciplina de BANCO DE DADOS no Curso de Bacharelado de 
-                    Engenharia de Software, ministrada pelo Professor Me. Victor Ferreira. Pensando em desenvolver algo que tivesse um impacto
-                    positivo no ambiente da saúde e bem-estar a equipe composta por Ana Júlia, Eloise Sophia, Murilo Lucena, Paula Beatriz 
-                    e Rony Rangel propõe a aplicação do My Pills.     
-                </p>
-                <p>
-                    Nosso objetivo principal é oferecer um sistema para o controle e monitoramento de medicações,
-                    além do gerenciamento de consultas médicas. O usuário é capaz de  adicionar, remover e pesquisar 
-                    remédios em seu perfil com a capacidade de personalizar  informações como descrição, horários de
-                    medicação e período de uso. Ademais, os usuários podem agendar e gerenciar consultas médicas,
-                    recebendo lembretes automáticos por WhatsApp para garantir a adesão do seu tratamento.  
-                </p>
-                
+            </div>
+            <div class="second-column">
+                <button class="pag-botoes" id="add">
+                    ADICIONAR
+                </button>
+                <button class="pag-botoes" id="remedios">
+                    MEUS REMÉDIOS
+                </button>
+                <button class="pag-botoes" id="consultas">
+                    MINHAS CONSULTAS
+                </button>
+                <button class="pag-botoes" id="perfil">
+                    MEU PERFIL
+                </button>
             </div>
         </div>
         
