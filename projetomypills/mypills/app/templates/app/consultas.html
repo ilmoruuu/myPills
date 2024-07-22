@@ -125,7 +125,8 @@
                 <td>
                     <form method="post" style="display: inline;">
                         {% csrf_token %}
-                        <button type="submit" style="border: none; background-color: white;" name="Deletar">
+                        <input type="hidden" name="id_consulta" id="id_consulta" value="{{ consulta.id }}">
+                        <button type="submit" style="border: none; background-color: white;" name="deletar">
                             <img src="{% static 'app/imagens/delete.png' %}">
                         </button>
                     </form>
@@ -166,46 +167,12 @@
         };
     </script>
     <script>
-          async function fetchData() {
-            try {
-            const response = await fetch('mudar para URl de acesso do back');
-            
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-
-            const data = await response.json();
-            
-            populateTable(data);
-            } catch (error) {
-            console.error('Erro ao buscar dados:', error);
-            }
+        document.getElementById("deletar").addEventListener('click', function(event) {
+        event.preventDefault(); 
+        if (confirm("Tem certeza que deseja excluir este item?")) {
+            this.closest('form').submit();
         }
-
-        function populateTable(data) {
-            const tableBody = document.querySelector('.corpo-tabela');
-
-            tableBody.innerHTML = '';
-
-
-            data.forEach(item => {
-            const row = document.createElement('tr');
-        
-            /*row.innerHTML = `
-            
-                <td>${item. }</td>
-                <td>${item.local}</td>
-                <td>${item.horario}</td>
-                <td>${item.}</td>
-            `;
-            comentei porque as chaves do banco de dados não batia com as de consulta
-            */
-
-            tableBody.appendChild(row);
-            });
-        }
-
-        fetchData();
-    </script>  
+        });
+    </script> 
 </body>
 </html>

@@ -127,7 +127,8 @@
                 <td>
                     <form method="post" style="display: inline;">
                         {% csrf_token %}
-                        <button type="submit" style="border: none; background-color: white;" name="Deletar">
+                        <input type="hidden" name="id_remedio" id="id_remedio" value="{{ remedio.id }}">
+                        <button type="submit" style="border: none; background-color: white;" name="deletar" >
                             <img src="{% static 'app/imagens/delete.png' %}">
                         </button>
                     </form>
@@ -166,5 +167,13 @@
             location.href = "http://127.0.0.1:8000/add/";
         };
     </script>
+    <script>
+        document.getElementById("deletar").addEventListener('click', function(event) {
+        event.preventDefault(); 
+        if (confirm("Tem certeza que deseja excluir este item?")) {
+            this.closest('form').submit();
+        }
+        });
+    </script> 
 </body>
 </html>

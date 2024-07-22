@@ -78,6 +78,13 @@ def remedios(request):
     user_id = request.session.get('user_id')[0]
     user = get_user(user_id)
     remedios = get_remedios(user.id)
+    if request.method == 'POST' and 'deletar' in request.POST:
+        #quero garantir que o valor seja inteiro
+        id_remedio = int(request.POST['id_remedio'])
+
+
+        delete_remedio(id_remedio, user.id)
+        return redirect('remedios')
     return render(request, 'app/remedios.html', {
         'user': user,
         'remedios': remedios
@@ -87,7 +94,11 @@ def consultas(request):
     user_id = request.session.get('user_id')[0]
     user = get_user(user_id)
     consultas = get_consultas(user.id)
-    print(consultas)
+    if request.method == 'POST' and 'deletar' in request.POST:
+        id_consulta = int(request.POST['id_consulta'])
+
+        delete_consulta(id_consulta, user.id)
+        return redirect('consultas')
     return render(request, 'app/consultas.html', {
         'user': user,
         'consultas': consultas
@@ -272,43 +283,21 @@ def get_consultas(id):
         consultas.append(consulta_instance)
     return consultas
 
-def delete_remedio(request, remedio_id):
-    user_id = request.session.get('user_id')[0]
-    conexao = connect_bd()
-    cursor = conexao.cursor()
-    try:
+def delete_remedio(remedio_id, user_id):
+        conexao = connect_bd()
+        cursor = conexao.cursor()
         cursor.execute("DELETE FROM remedio WHERE idRemedio = %s AND idPaciente = %s", (remedio_id, user_id))
         conexao.commit()
-        return redirect('remedios')
-    except Exception as erroAoDeletar:
-        conexao.rollback()
-        return render(request, 'app/remedios.html', {
-            'mensagem': f'Ops! Ocorreu um erro ao deletar o remédio! ERRO: {erroAoDeletar}',
-            'remedios': get_remedios(user_id),
-            'user': get_user(user_id)
-        })
-    finally:
         cursor.close()
         conexao.close()
         return redirect('remedios')
         
 
-def delete_consulta(request, consulta_id):
-    user_id = request.session.get('user_id')[0]
+def delete_consulta(consulta_id, user_id):
     conexao = connect_bd()
     cursor = conexao.cursor()
-    try:
-        cursor.execute("DELETE FROM consulta WHERE idConsulta = %s AND idPaciente = %s", (consulta_id, user_id))
-        conexao.commit()
-        return redirect('consultas')
-    except Exception as erroAoDeletar:
-        conexao.rollback()
-        return render(request, 'app/consultas.html', {
-            'mensagem': f'Ops! Ocorreu um erro ao deletar a consulta! ERRO: {erroAoDeletar}',
-            'consultas': get_consultas(user_id),
-            'user': get_user(user_id)
-        })
-    finally:
-        cursor.close()
-        conexao.close()
-        return redirect('consultas')
+    cursor.execute("DELETE FROM consulta WHERE idConsulta = %s AND idPaciente = %s", (consulta_id, user_id))
+    conexao.commit()
+    cursor.close()
+    conexao.close()
+    return redirect('consultas')
