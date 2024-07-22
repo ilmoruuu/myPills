@@ -12,14 +12,16 @@
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Paytone+One" />
     <style>
         body {
-            background-color: #74b4bb;
+            background-color: #acd4d8;
             color: #4a969e;
+            display: flex;
+            flex-direction: column;
         }
         .topo {
             display: flex;
-            justify-content: center;
-            align-items: center;
+            justify-content: first baseline;
             padding: 0;
+            margin-left: 80px;
         }
         .caixa-add {
             /*margin: 0 30px;*/
@@ -27,7 +29,7 @@
             flex-direction: column;
             margin-top: 0px;
             border-radius: 10px;
-            background: #c2e7d3d5;
+            background: white;
             padding: 20px 60px;
             width: 900px;
             box-shadow: #bbcec3 1px 1px 12px;
@@ -43,12 +45,19 @@
             width: 250px;
             background-color: #acd4d8;
             color: black;
+            box-shadow: 10px 10px 5px rgb(59, 58, 58);
             padding: 12px;
             margin: 30px 60px;
             border-radius: 8px;
             cursor: pointer;
             font-weight: 620;
         }
+
+        .pag-botoes:hover {
+            transform: scale(1.1);
+        }
+
+
         .menu {
             display: flex;
             flex-direction: column;
@@ -61,65 +70,37 @@
             height: 500px;
         }
 
+        .second-column {
+            width: 420px;
+            height: 620px;
+            padding: 40px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: #acd4d8;
+            border-radius: 10px;
+            margin-top: 70px;}
+
         .first-column {
+            margin-top: 50px;
             width: 50%;
             height: 500px;
             padding: 0 40px;
-            float: left;
             justify-content: center;
             text-align: center;
+            padding-right: 150px;
         }
-
-        .second-column {
-            width: 50%;
-            height: 500px;
-            padding: 40px 40px;
-            float: right;
-            justify-content: center;
-            text-align: center;
-        }
-
+        
         .cloud {
-            width: 350px; height: 120px;
-            
-            background: #f2f9fe;
-            background: linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
-            background: -webkit-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
-            background: -moz-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
-            background: -ms-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
-            background: -o-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
-            
-            border-radius: 100px;
-            -webkit-border-radius: 100px;
-            -moz-border-radius: 100px;
-            
-            position: relative;
-            margin: 120px auto 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(51, 51, 51, 0.7);
         }
 
-        .cloud:after, .cloud:before {
-            content: '';
-            position: absolute;
-            background: #f2f9fe;
-            z-index: -1
-        }
-
-        .cloud:after {
-            width: 100px; height: 100px;
-            top: -50px; left: 50px;
-            
-            border-radius: 100px;
-            -webkit-border-radius: 100px;
-            -moz-border-radius: 100px;
-        }
-
-        .cloud:before {
-            width: 180px; height: 180px;
-            top: -90px; right: 50px;
-            border-radius: 200px;
-            -webkit-border-radius: 200px;
-            -moz-border-radius: 200px;
-        }
 
         p{
             color: rgb(0, 60, 70);
@@ -129,48 +110,100 @@
             font-family: 'gill sans', Cochin, Georgia, Times, 'Times New Roman', serif;
         }
 
+        .tecnologias {
+            margin-left: 68px;
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: first baseline;
+            width: 850px;
+            background-color: #acd4d8;
+            color: black;
+            border-radius: 10px;
+            padding: 20px;
+            font-family: 'gill sans', Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        .logos-tecnologias {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .main {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .container-principal {
+            background-color: #74b4bb;
+        }
+        
+
     </style>
     
     <title>Menu Principal</title>
 </head>
 <body>
-    <div class="header">
-
-        <header class="topo">
-            <img src="{% static 'app/imagens/Logo.png' %}" class="logo-login"  style="justify-content: center;">
-        </header>
-
-        <div class="main">
-            <div class="first-column">
-                <div class="cloud">
-                    <j style="font-family: 'Paytone One'; font-size: 180%">
-                        Bem-vindo<br> ao My Pills!
-                    </j>
+    <div class="container-principal">
+        <div class="header">
+    
+            <header class="topo">
+                <img src="{% static 'app/imagens/Logo.png' %}" class="logo-login"  style="justify-content: center;">
+            </header>
+            
+            <div class="main">
+                <div class="first-column">
+                    <button class="pag-botoes" id="add">
+                        ADICIONAR
+                    </button>
+                    <button class="pag-botoes" id="remedios">
+                        MEUS REMÉDIOS
+                    </button>
+                    <button class="pag-botoes" id="consultas">
+                        MINHAS CONSULTAS
+                    </button>
+                    <button class="pag-botoes" id="perfil">
+                        MEU PERFIL
+                    </button>
+                    <div style="width: 350px; margin-top: 50px;  background-color: #acd4d8; margin-left: 40px; border-radius: 10px; color: rgb(0, 60, 70); padding: 10px; font-family: 'gill sans', Cochin, Georgia, Times, 'Times New Roman', serif; ">
+                        O MyPills foi desenvolvido para fins avaliativos na disciplina de BANCO DE DADOS no Curso de Bacharelado de 
+                        Engenharia de Software, ministrada pelo Professor Me. Victor Ferreira. Pensando em desenvolver algo que tivesse um impacto
+                        positivo no ambiente da saúde e bem-estar a equipe composta por Ana Júlia, Eloise Sophia, Murilo Lucena, Paula Beatriz 
+                        e Rony Rangel propõe a aplicação do My Pills. 
+                    </div>
                 </div>
-                <p style="width: 400px;">
-                    O MyPills foi desenvolvido para fins avaliativos na disciplina de Banco de Dados no Curso de Bacharelado de 
-                    Engenharia de Software, ministrada pelo Professor Me.Victor Ferreira. Pensando em desenvolver algo que tivesse
-                    um impacto positivo no ambiente da saúde e bem-estar, a equipe composta por Ana Júlia, Eloise Sophia, Murilo Lucena, Paula Beatriz 
-                    e Rony Rangel propõe a aplicação do My Pills.
-                </p>
-                <br>
+                <div class="second-column">
+                    <div class="cloud">
+                        <img  src="{% static 'app/imagens/remedios.png'%}" width="300px">
+                        <j style="font-family: 'Paytone One'; font-size: 200%; margin-top: 20px;  color: rgb(11, 169, 174)">
+                            Bem-vindo <br>ao My Pills!
+                        </j>
+                    </div>
+                    <br>
+                    <br>
+                    <p style="width: 400px; font-size: large;">
+                        Agora você nunca mais irá esquecer de cuidar da sua saúde!
+                    </p>
+                    <br>
+                </div>
             </div>
-            <div class="second-column">
-                <button class="pag-botoes" id="add">
-                    ADICIONAR
-                </button>
-                <button class="pag-botoes" id="remedios">
-                    MEUS REMÉDIOS
-                </button>
-                <button class="pag-botoes" id="consultas">
-                    MINHAS CONSULTAS
-                </button>
-                <button class="pag-botoes" id="perfil">
-                    MEU PERFIL
-                </button>
+            
+        </div>
+        <div class="tecnologias">
+            <label style="font-size: 150%;">Tecnologias utilizadas</label> 
+            <br>
+            <div class="logos-tecnologias">
+                <img src="{% static 'app/imagens/django.png'%}" width="70px">
+                <img src="{% static 'app/imagens/python.png'%}" width="70px">
+                <img src="{% static 'app/imagens/css.png'%}" width="70px">
+                <img src="{% static 'app/imagens/html.png'%}" width="70px">
+                <img src="{% static 'app/imagens/javascript.png'%}" width="70px">
+                <img src="{% static 'app/imagens/postgres.png'%}" width="70px">
             </div>
         </div>
-        
+        <br>
+        <br>
+        <br>
     </div>
     {% if user %}
     <script type="text/javascript">
