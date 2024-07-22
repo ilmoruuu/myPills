@@ -112,6 +112,7 @@
                     <th>LOCAL</th>
                     <th>DATA</th>
                     <th>HORA</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody class="corpo-tabela">
@@ -121,7 +122,16 @@
                 <td>{{consulta.local}}</td>
                 <td>{{consulta.data}}</td>
                 <td>{{consulta.horario}}</td>
+                <td>
+                    <form method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" style="border: none; background-color: white;" name="Deletar">
+                            <img src="{% static 'app/imagens/delete.png' %}">
+                        </button>
+                    </form>
+                </td>
                 </tr>
+                
                 {% endfor block %}
             </tbody>
         </table>

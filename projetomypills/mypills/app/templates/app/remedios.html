@@ -113,6 +113,7 @@
                     <th>LOTE</th>
                     <th>DATA DE FABRICAÇÃO</th>
                     <th>DATA DE VALIDADE</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody class="corpo-tabela">
@@ -123,6 +124,14 @@
                 <td>{{remedio.lote}}</td>
                 <td>{{remedio.data_fabricacao}}</td>
                 <td>{{remedio.data_vencimento}}</td>
+                <td>
+                    <form method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" style="border: none; background-color: white;" name="Deletar">
+                            <img src="{% static 'app/imagens/delete.png' %}">
+                        </button>
+                    </form>
+                </td>
                 </tr>
                 {% endfor block %}
             </tbody>
