@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" 
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'app/styles.css' %}">
     <link rel="shortcut icon" href="{% static 'app/imagens/Logo.png'%}" type="image/x-icon">
     <title>Remédios</title>
@@ -13,7 +12,7 @@
         body {
             background-repeat: no-repeat;
             background-size: cover;
-            background-color:#74b4bb;
+            background-color: #74b4bb;
         }
         .topo {
             display: flex;
@@ -86,21 +85,11 @@
 </head>
 <body>
     <header class="topo">
-        <img src="{% static 'app/imagens/Logo.png' %}"
-        class="logo-login"
-        style="margin-right: 200px;">
-        <button class="topo-botoes" id="principal">
-            MENU PRINCIPAL
-        </button>
-        <button class="topo-botoes" id="add">
-            ADICIONAR
-        </button>
-        <button class="topo-botoes" id="consultas">
-            MINHAS CONSULTAS
-        </button>
-        <button class="topo-botoes" id="perfil">
-            MEU PERFIL
-        </button>
+        <img src="{% static 'app/imagens/Logo.png' %}" class="logo-login" style="margin-right: 200px;">
+        <button class="topo-botoes" id="principal">MENU PRINCIPAL</button>
+        <button class="topo-botoes" id="add">ADICIONAR</button>
+        <button class="topo-botoes" id="consultas">MINHAS CONSULTAS</button>
+        <button class="topo-botoes" id="perfil">MEU PERFIL</button>
     </header>
     <br>
     <div class="container">
@@ -113,77 +102,56 @@
                     <th>LOTE</th>
                     <th>DATA DE FABRICAÇÃO</th>
                     <th>DATA DE VALIDADE</th>
-                    <th>
-                        <img src="{% static 'app/imagens/whatsapp.png'%}">
-                    </th>
+                    <th>HORÁRIO</th>
+                    <th><img src="{% static 'app/imagens/whatsapp.png' %}"></th>
                 </tr>
             </thead>
             <tbody class="corpo-tabela">
                 {% for remedio in remedios %}
                 <tr>
-                <td>{{remedio.nome_comercial}}</td>
-                <td>{{remedio.dosagem}}</td>
-                <td>{{remedio.lote}}</td>
-                <td>{{remedio.data_fabricacao}}</td>
-                <td>{{remedio.data_vencimento}}</td>
-                <td>
-                    <form method="post" id="checkboxes">
-                        {% csrf_token %}
-                        <input type="checkbox" name="whatsapp" value="{{ remedio.id }}">
-                    </form>
-                </td>
-                <td>
-                    <form method="post" style="display: inline;">
-                        {% csrf_token %}
-                        <input type="hidden" name="id_remedio" id="id_remedio" value="{{ remedio.id }}">
-                        <button type="submit" style="border: none; background-color: white;" name="deletar" >
-                            <img src="{% static 'app/imagens/delete.png' %}">
-                        </button>
-                    </form>
-                </td>
+                    <td>{{ remedio.nome_comercial }}</td>
+                    <td>{{ remedio.dosagem }}</td>
+                    <td>{{ remedio.lote }}</td>
+                    <td>{{ remedio.data_fabricacao }}</td>
+                    <td>{{ remedio.data_vencimento }}</td>
+                    <td>{{ remedio.horario }}</td>
+                    <td>
+                        <form method="post" id="checkboxes">
+                            {% csrf_token %}
+                            <input type="checkbox" name="whatsapp" value="{{ remedio.id }}">
+                        </form>
+                    </td>
+                    <td>
+                        <form method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="id_remedio" id="id_remedio" value="{{ remedio.id }}">
+                            <button type="submit" style="border: none; background-color: white;" name="deletar">
+                                <img src="{% static 'app/imagens/delete.png' %}">
+                            </button>
+                        </form>
+                    </td>
                 </tr>
-                {% endfor block %}
+                {% endfor %}
             </tbody>
         </table>
-        <button type="button" class="botao-perfil" id="adicionar">
-            ADICIONAR REMÉDIO
-        </button>
+        <button type="button" class="botao-perfil" id="adicionar">ADICIONAR REMÉDIO</button>
     </div>
     <script type="text/javascript">
         document.getElementById("principal").onclick = function () {
             location.href = "http://127.0.0.1:8000/";
         };
-        </script>
-    <script type="text/javascript">
         document.getElementById("add").onclick = function () {
             location.href = "http://127.0.0.1:8000/add/";
         };
-       
-        </script>
-    <script type="text/javascript">
         document.getElementById("consultas").onclick = function () {
             location.href = "http://127.0.0.1:8000/consultas/";
         };
-        </script>
-    <script type="text/javascript">
         document.getElementById("perfil").onclick = function () {
             location.href = "http://127.0.0.1:8000/perfil/";
         };
-    </script>
-    <script type="text/javascript">
         document.getElementById("adicionar").onclick = function () {
             location.href = "http://127.0.0.1:8000/add/";
         };
-    </script>
-    <script>
-        document.getElementById("deletar").addEventListener('click', function(event) {
-        event.preventDefault(); 
-        if (confirm("Tem certeza que deseja excluir este item?")) {
-            this.closest('form').submit();
-        }
-        });
-    </script> 
-    <script>
         document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
             checkbox.addEventListener('change', function() {
                 const form = this.closest('form');

@@ -1,8 +1,13 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from datetime import date, time, datetime
+from twilio.rest import Client
 import psycopg2
 
+## AQUI TWILIO ##
+account_sid = 'segredo'
+auth_token = '[AuthToken]'
+client = Client(account_sid, auth_token)
 
 def index(request):
     user = request.session.get('user_id')
@@ -161,15 +166,16 @@ def add(request):
             lote = request.POST['lote']
             fabricacao = request.POST['fabricacao']
             validade = request.POST['validade']
+            horario = request.POST['horario']
             fabricacao = datetime.strptime(fabricacao, '%Y-%m-%d').date()
             validade = datetime.strptime(validade, '%Y-%m-%d').date()
-            
+            horario = datetime.strptime(horario, '%H:%M').time()
             try:
                 cursor.execute("""
-                INSERT INTO remedio (nome_comercial, data_vencimento, data_fabricacao, dosagem, lote, idPaciente)
-                    VALUES (%s, %s, %s, %s, %s, %s)
+                INSERT INTO remedio (nome_comercial, data_vencimento, data_fabricacao, dosagem, lote, idPaciente, horario)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s)
                     RETURNING idRemedio""",
-                    (remedio, validade, fabricacao, dosagem, lote, user.id))
+                    (remedio, validade, fabricacao, dosagem, lote, user.id, horario))
                 id_remedio = cursor.fetchone()[0]
             except Exception as erroCadastro:
                 conexao.rollback()
@@ -177,7 +183,7 @@ def add(request):
                     'mensagem': f'Erro ao cadastrar: {erroCadastro}'
                 })
             finally:
-                print("{id_remedio} cadastrado!")
+                print(f"{id_remedio} cadastrado!")
                 conexao.commit()
                 conexao.close()
 
@@ -192,13 +198,11 @@ def add(request):
 
             data = datetime.strptime(data, '%Y-%m-%d').date()
 
-            cursor.execute("""
-                           INSERT INTO historico (idPaciente)
+            cursor.execute("""INSERT INTO historico (idPaciente)
                             VALUES (%s)
                             RETURNING idHistorico
                         """, (user.id,))
             id_historico = cursor.fetchone()[0]
-
 
             cursor.execute("""
                 INSERT INTO consulta (idPaciente, idHistorico, medico, local, data, horario)
@@ -220,7 +224,7 @@ def connect_bd():
         conn = psycopg2.connect(
             dbname="MyPills",
             user="postgres",
-            password="marialaiz1",
+            password="ilmoru0407",
             host="localhost",
             port="5432"
         )
@@ -243,13 +247,14 @@ class User:
         self.genero = genero
 
 class Remedio:
-    def __init__(self, id, nome_comercial, data_vencimento, data_fabricacao, dosagem, lote):
+    def __init__(self, id, nome_comercial, data_vencimento, data_fabricacao, dosagem, lote, horario):
         self.id = id
         self.nome_comercial = nome_comercial
         self.data_vencimento = data_vencimento
         self.data_fabricacao = data_fabricacao
         self.dosagem = dosagem
         self.lote = lote
+        self.horario = horario
 
 class Consulta:
     def __init__(self, id, idPaciente, idHistorico, horario, local, medico, data):
@@ -273,7 +278,7 @@ def get_remedios(id):
     result = cursor.fetchall()
     remedios = []
     for remedio in result:
-        remedio_instance = Remedio(remedio[0], remedio[1], remedio[2], remedio[3], remedio[4], remedio[5])
+        remedio_instance = Remedio(remedio[0], remedio[1], remedio[2], remedio[3], remedio[4], remedio[5], remedio[6])
         remedios.append(remedio_instance)
     return remedios
 
