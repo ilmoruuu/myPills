@@ -272,14 +272,43 @@ def get_consultas(id):
         consultas.append(consulta_instance)
     return consultas
 
-def delete_remedios(id):
-    cursor = connect_bd().cursor()
-    cursor.execute("DELETE FROM remedio WHERE idPaciente = %s AND idRemedio = %s", (id, ))
-    connect_bd().commit()
-    return redirect('remedios')
+def delete_remedio(request, remedio_id):
+    user_id = request.session.get('user_id')[0]
+    conexao = connect_bd()
+    cursor = conexao.cursor()
+    try:
+        cursor.execute("DELETE FROM remedio WHERE idRemedio = %s AND idPaciente = %s", (remedio_id, user_id))
+        conexao.commit()
+        return redirect('remedios')
+    except Exception as erroAoDeletar:
+        conexao.rollback()
+        return render(request, 'app/remedios.html', {
+            'mensagem': f'Ops! Ocorreu um erro ao deletar o remédio! ERRO: {erroAoDeletar}',
+            'remedios': get_remedios(user_id),
+            'user': get_user(user_id)
+        })
+    finally:
+        cursor.close()
+        conexao.close()
+        return redirect('remedios')
+        
 
-def delete_consultas(id):
-    cursor = connect_bd().cursor()
-    cursor.execute("DELETE FROM consulta WHERE idPaciente = %s AND idConsulta = %s ", (id, ))
-    connect_bd().commit()
-    return redirect('consultas')
+def delete_consulta(request, consulta_id):
+    user_id = request.session.get('user_id')[0]
+    conexao = connect_bd()
+    cursor = conexao.cursor()
+    try:
+        cursor.execute("DELETE FROM consulta WHERE idConsulta = %s AND idPaciente = %s", (consulta_id, user_id))
+        conexao.commit()
+        return redirect('consultas')
+    except Exception as erroAoDeletar:
+        conexao.rollback()
+        return render(request, 'app/consultas.html', {
+            'mensagem': f'Ops! Ocorreu um erro ao deletar a consulta! ERRO: {erroAoDeletar}',
+            'consultas': get_consultas(user_id),
+            'user': get_user(user_id)
+        })
+    finally:
+        cursor.close()
+        conexao.close()
+        return redirect('consultas')
