@@ -132,6 +132,10 @@
                     <input type="file" accept="image/jpeg, image/png, image/jpg" id="inputfile" onchange="loadInputFile(event)" style="display: none">
                     <img src="{% static 'app/imagens/blankpfp.png' %}" id="profilepic">
                     <label class="botao-perfil" style="width: 175px;" for="inputfile">MUDAR FOTO</label>
+                    <form method="post">
+                        {% csrf_token %}
+                        <button name="logout" type="submit" class="botao-perfil" id="Logout" style="background-color: red; width: 175px;">Sair</button>
+                    </form>
                 </div>
             </div>
             <div class="second-column">
@@ -303,7 +307,7 @@
                             <button type="button" class="botao-perfil" id="editar">
                                 EDITAR
                             </button>
-                            <button class="botao-perfil" id="salvar" type="submit" >
+                            <button class="botao-perfil" id="salvar" type="submit" name="editar" >
                                 SALVAR ALTERAÇÕES
                             </button>
                         </div>

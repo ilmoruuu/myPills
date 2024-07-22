@@ -96,7 +96,7 @@ def consultas(request):
 def perfil(request):
     user_id = request.session.get('user_id')[0]
     user_info = get_user(user_id)
-    if request.method == 'POST':
+    if request.method == 'POST' and 'editar' in request.POST:
         nome = request.POST["nome"]
         email = request.POST["email"]
         senha = request.POST["senha"]
@@ -127,6 +127,9 @@ def perfil(request):
         return render(request, 'app/perfil.html', {
             'user': user_info
         })
+    if request.method == 'POST' and 'logout' in request.POST:
+        request.session.flush()
+        return redirect('login')
 
     return render(request, 'app/perfil.html',
                   {'user': user_info})
