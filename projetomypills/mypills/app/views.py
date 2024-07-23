@@ -5,9 +5,28 @@ from twilio.rest import Client
 import psycopg2
 
 ## AQUI TWILIO ##
-account_sid = 'segredo'
+account_sid = '[sidUsuário]'
 auth_token = '[AuthToken]'
 client = Client(account_sid, auth_token)
+
+def sendMensagem(numero_telefone, nome, horario, remedio, dosagem):
+    # Credenciais da conta Twilio
+    account_sid = '[sidUsuário]'
+    auth_token = '[AuthToken]'
+    client = Client(account_sid, auth_token)
+
+    mensagem = f"Olá {nome}! Chegou a hora da medicação! 💊👩‍⚕\nÀs {horario} faça a utilização do(e) {remedio} com {dosagem}ml de dosagem!\n\nFique atento(a) ao horário, certo?"
+
+    try:
+        message = client.messages.create(
+            body=mensagem,
+            from_='whatsapp:+14155238886',  
+            to=f'whatsapp:+{numero_telefone}'
+        )
+        return True, f"Mensagem enviada com sucesso! SID: {message.sid}"
+    
+    except Exception as e:
+        return False, str(e)
 
 def index(request):
     user = request.session.get('user_id')
@@ -222,7 +241,7 @@ def connect_bd():
         conn = psycopg2.connect(
             dbname="MyPills",
             user="postgres",
-            password="marialaiz1",
+            password="ilmoru0407",
             host="localhost",
             port="5432"
         )
