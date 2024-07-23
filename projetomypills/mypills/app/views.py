@@ -246,13 +246,14 @@ class User:
         self.genero = genero
 
 class Remedio:
-    def __init__(self, id, nome_comercial, data_vencimento, data_fabricacao, dosagem, lote, horario):
+    def __init__(self, id, nome_comercial, data_vencimento, data_fabricacao, dosagem, lote, idPaciente, horario):
         self.id = id
         self.nome_comercial = nome_comercial
         self.data_vencimento = data_vencimento
         self.data_fabricacao = data_fabricacao
         self.dosagem = dosagem
         self.lote = lote
+        self.idPaciente = idPaciente
         self.horario = horario
 
 class Consulta:
@@ -277,7 +278,7 @@ def get_remedios(id):
     result = cursor.fetchall()
     remedios = []
     for remedio in result:
-        remedio_instance = Remedio(remedio[0], remedio[1], remedio[2], remedio[3], remedio[4], remedio[5], remedio[6])
+        remedio_instance = Remedio(remedio[0], remedio[1], remedio[2], remedio[3], remedio[4], remedio[5], remedio[6], remedio[7])
         remedios.append(remedio_instance)
     return remedios
 
@@ -309,3 +310,5 @@ def delete_consulta(consulta_id, user_id):
     cursor.close()
     conexao.close()
     return redirect('consultas')
+
+print(get_remedios(1)[0].horario)
