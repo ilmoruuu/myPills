@@ -130,7 +130,7 @@ def perfil(request):
             conexao = connect_bd()
             cursor = conexao.cursor()
             cursor.execute("""UPDATE paciente SET nome = %s, email = %s, senha = %s, idade = %s, peso = %s, altura = %s, comorbidade = %s, cpf = %s, genero = %s WHERE idPaciente = %s""",
-                (nome, email, senha, idade, peso, altura, comorbidade, cpf, genero, user))
+                (nome, email, senha, idade, peso, altura, comorbidade, cpf, genero, user_id))
         
         except Exception as erroCadastro:
             conexao.rollback()
@@ -162,7 +162,6 @@ def add(request):
         if 'add_remedio' in request.POST:
             remedio = request.POST['remedio']
             dosagem = request.POST['dosagem']
-            lote = request.POST['lote']
             fabricacao = request.POST['fabricacao']
             validade = request.POST['validade']
             horario = request.POST['horario']
@@ -171,10 +170,10 @@ def add(request):
             horario = datetime.strptime(horario, '%H:%M').time()
             try:
                 cursor.execute("""
-                INSERT INTO remedio (nome_comercial, data_vencimento, data_fabricacao, dosagem, lote, idPaciente, horario)
-                    VALUES (%s, %s, %s, %s, %s, %s, %s)
+                INSERT INTO remedio (nome_comercial, data_vencimento, data_fabricacao, dosagem, idPaciente, horario)
+                    VALUES (%s, %s, %s, %s, %s, %s)
                     RETURNING idRemedio""",
-                    (remedio, validade, fabricacao, dosagem, lote, user.id, horario))
+                    (remedio, validade, fabricacao, dosagem, user.id, horario))
                 id_remedio = cursor.fetchone()[0]
             except Exception as erroCadastro:
                 conexao.rollback()
@@ -246,13 +245,12 @@ class User:
         self.genero = genero
 
 class Remedio:
-    def __init__(self, id, nome_comercial, data_vencimento, data_fabricacao, dosagem, lote, idPaciente, horario):
+    def __init__(self, id, nome_comercial, data_vencimento, data_fabricacao, dosagem, idPaciente, horario):
         self.id = id
         self.nome_comercial = nome_comercial
         self.data_vencimento = data_vencimento
         self.data_fabricacao = data_fabricacao
         self.dosagem = dosagem
-        self.lote = lote
         self.idPaciente = idPaciente
         self.horario = horario
 
@@ -278,7 +276,7 @@ def get_remedios(id):
     result = cursor.fetchall()
     remedios = []
     for remedio in result:
-        remedio_instance = Remedio(remedio[0], remedio[1], remedio[2], remedio[3], remedio[4], remedio[5], remedio[6], remedio[7])
+        remedio_instance = Remedio(remedio[0], remedio[1], remedio[2], remedio[3], remedio[4], remedio[5], remedio[6])
         remedios.append(remedio_instance)
     return remedios
 
