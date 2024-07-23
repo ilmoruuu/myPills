@@ -84,7 +84,6 @@ def remedios(request):
     user = get_user(user_id)
     remedios = get_remedios(user.id)
     if request.method == 'POST' and 'deletar' in request.POST:
-        #quero garantir que o valor seja inteiro
         id_remedio = int(request.POST['id_remedio'])
 
 
@@ -224,7 +223,7 @@ def connect_bd():
         conn = psycopg2.connect(
             dbname="MyPills",
             user="postgres",
-            password="ilmoru0407",
+            password="marialaiz1",
             host="localhost",
             port="5432"
         )
